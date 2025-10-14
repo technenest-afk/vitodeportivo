@@ -6,13 +6,14 @@
     <title>Catálogo | Vito Deportivo</title>
     <style>
         /* ------------------------------------------- */
-        /* CSS BASADO EN COMOQUIERES / DISEÑO MINIMALISTA CLARO */
+        /* CSS BASADO EN ESTILO MODERNO CLARO Y LIMPIO */
         /* ------------------------------------------- */
         
         :root {
             --color-principal: #ff6600; /* Naranja Vito Deportivo (acentos) */
-            --color-fondo: #ffffff; /* Fondo Blanco */
+            --color-fondo: #f9f9f9; /* Fondo Gris Cemento muy CLARO */
             --color-texto-oscuro: #333333;
+            --color-header: #ffffff; /* Header/Card Blanco Puro */
             --color-borde: #eeeeee; /* Borde muy sutil */
         }
 
@@ -20,11 +21,7 @@
             font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            /* CAMBIOS DE FONDO */
-            background-image: url('https://static.vecteezy.com/system/resources/previews/002/677/456/non_2x/white-grey-cement-concrete-textured-background-soft-natural-wall-backdrop-for-aesthetic-creative-design-free-photo.jpg');
-            background-repeat: repeat; 
-            background-attachment: fixed;
-            background-color: var(--color-fondo); /* Fallback */
+            background-color: var(--color-fondo);
             color: var(--color-texto-oscuro);
             display: flex;
             flex-direction: column; 
@@ -35,17 +32,23 @@
             flex-grow: 1;
         }
 
-        /* 1. ESTILO DEL ENCABEZADO (Header) */
+        /* 1. ESTILO DEL ENCABEZADO (Header) - AHORA STICKY */
         header {
-            background-color: var(--color-fondo);
+            background-color: var(--color-header);
             padding: 15px 40px; 
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--color-borde);
+            
+            /* PROPIEDADES STICKY */
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
         header .logo {
-            height: 60px; /* Logo más grande */
+            height: 60px; 
             width: auto;
             margin-right: auto; 
         }
@@ -67,15 +70,17 @@
         }
         .boton-carrito {
             background-color: transparent;
-            border: 1px solid var(--color-principal);
-            color: var(--color-principal);
+            border: 1px solid var(--color-texto-oscuro); /* Borde negro/oscuro */
+            color: var(--color-texto-oscuro);
             padding: 8px 15px;
-            border-radius: 3px;
+            border-radius: 0;
             font-size: 0.9em;
+            font-weight: 500;
             transition: background-color 0.3s, color 0.3s;
         }
         .boton-carrito:hover {
             background-color: var(--color-principal);
+            border-color: var(--color-principal);
             color: white;
         }
 
@@ -87,23 +92,21 @@
             padding: 60px 40px;
             max-width: 1200px;
             margin: auto;
-            background-color: rgba(255, 255, 255, 0.9); /* Fondo ligeramente transparente para el contenido */
-            box-shadow: 0 0 20px rgba(0,0,0,0.05);
         }
 
         /* 3. DISEÑO DE LA TARJETA DE PRODUCTO (Card) */
         .producto-card {
-            background-color: var(--color-fondo);
-            border: none;
+            background-color: var(--color-header); /* Fondo de tarjeta blanco */
+            border: 1px solid var(--color-borde);
             border-radius: 0;
             padding: 0;
-            box-shadow: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05); /* Sombra sutil */
             text-align: left; 
-            transition: opacity 0.3s;
+            transition: box-shadow 0.3s;
             cursor: pointer; 
         }
         .producto-card:hover {
-            opacity: 0.9;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
         }
         .producto-card img {
             width: 100%;
@@ -115,27 +118,24 @@
         .producto-card h3 {
             color: var(--color-texto-oscuro);
             font-size: 1.1em;
-            margin: 0;
+            margin: 10px 10px 0 10px;
             font-weight: 500;
             text-transform: uppercase;
         }
         .producto-card .precio {
             font-size: 1.1em;
-            color: #666666; 
+            color: #666; 
             font-weight: 300;
-            margin: 5px 0 10px 0;
-        }
-        .producto-card .detalles {
-            display: none; 
+            margin: 5px 10px 10px 10px;
         }
         
         /* 4. ESTILO DEL BOTÓN DE AGREGAR EN LISTA */
         .boton-agregar-lista {
-            background-color: #000000;
+            background-color: var(--color-texto-oscuro); /* Botón NEGRO/Oscuro (como Discobolo) */
             color: white;
             padding: 10px 0;
             text-decoration: none;
-            border: 1px solid #000000;
+            border: 1px solid var(--color-texto-oscuro);
             border-radius: 0;
             font-weight: 500;
             cursor: pointer;
@@ -153,11 +153,12 @@
         footer {
             width: 100%;
             padding: 20px 0;
-            background-color: var(--color-fondo);
+            background-color: var(--color-header);
             color: #999999;
             font-size: 0.8em;
             border-top: 1px solid var(--color-borde);
             text-align: center;
+            margin-top: auto;
         }
         footer a {
             color: var(--color-principal);
@@ -176,12 +177,12 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0,0,0,0.7); 
+            background-color: rgba(0,0,0,0.6); 
             padding-top: 60px;
         }
 
         .modal-contenido {
-            background-color: var(--color-fondo);
+            background-color: var(--color-header); 
             margin: 5% auto;
             padding: 30px;
             border: 1px solid #888;
@@ -254,6 +255,14 @@
             width: 100%;
             padding: 15px;
             font-size: 1.1em;
+            background-color: var(--color-texto-oscuro);
+            color: white;
+            border: 1px solid var(--color-texto-oscuro);
+            border-radius: 0;
+        }
+        .boton-agregar-modal:hover {
+            background-color: var(--color-principal);
+            border-color: var(--color-principal);
         }
         
         .cerrar-modal {
@@ -350,39 +359,32 @@
         const botonAgregarModal = document.getElementById('boton-agregar-modal');
 
         let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-        let productoSeleccionado = null; // Guardará los datos del producto abierto
+        let productoSeleccionado = null; 
 
-        // Función para actualizar el contador del carrito en el header
         function actualizarContadorCarrito() {
             const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
             botonCarritoHeader.textContent = `CARRITO (${totalItems})`;
         }
 
-        // Función para formatear a moneda argentina
         function formatearPrecio(precio) {
             return precio.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0 });
         }
 
-        // Función principal para cargar y mostrar productos
         function cargarProductos() {
-            // Utilizamos la variable global 'productos' definida en productos.js
             if (typeof productos === 'undefined' || productos.length === 0) {
                 contenedorProductos.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; margin-top: 50px;">No hay productos disponibles en este momento.</p>';
                 return;
             }
 
-            contenedorProductos.innerHTML = ''; // Limpiar antes de rellenar
+            contenedorProductos.innerHTML = ''; 
 
             productos.forEach(producto => {
                 const card = document.createElement('div');
                 card.classList.add('producto-card');
-                
-                // Agregar el evento para abrir el modal al hacer clic en la tarjeta
                 card.onclick = () => abrirModal(producto.id);
 
                 const precioFormateado = formatearPrecio(producto.precio);
 
-                // Estructura de la tarjeta de producto
                 card.innerHTML = `
                     <img src="${producto.imagen}" alt="${producto.nombre}">
                     <h3>${producto.nombre}</h3>
@@ -396,29 +398,24 @@
             });
         }
 
-        // --- Lógica del Modal ---
-
         function abrirModal(id) {
             productoSeleccionado = productos.find(p => p.id === id);
             
             if (!productoSeleccionado) return;
 
-            // Rellenar el modal con la información del producto
             modalImagen.src = productoSeleccionado.imagen;
             modalNombre.textContent = productoSeleccionado.nombre;
             modalPrecio.textContent = formatearPrecio(productoSeleccionado.precio);
             modalDetalles.textContent = productoSeleccionado.detalles || 'Sin detalles adicionales.';
             
-            // Restablecer la cantidad a 1
             cantidadInput.value = 1;
             
-            // Asignar datos al botón de agregar
             botonAgregarModal.dataset.id = productoSeleccionado.id;
             botonAgregarModal.dataset.nombre = productoSeleccionado.nombre;
             botonAgregarModal.dataset.precio = productoSeleccionado.precio;
             
             modal.style.display = 'block';
-            document.body.style.overflow = 'hidden'; // Evita el scroll en el body
+            document.body.style.overflow = 'hidden'; 
         }
 
         function cerrarModal() {
@@ -427,18 +424,14 @@
             productoSeleccionado = null;
         }
 
-        // Cierra el modal si se hace clic fuera del contenido
         function cerrarModalExterno(e) {
             if (e.target === modal) {
                 cerrarModal();
             }
         }
         
-        // Asignar el evento al botón de agregar dentro del modal
         botonAgregarModal.addEventListener('click', agregarAlCarritoDesdeModal);
 
-
-        // Función para agregar un producto al carrito desde el modal
         function agregarAlCarritoDesdeModal(e) {
             const id = e.target.dataset.id;
             const nombre = e.target.dataset.nombre;
@@ -458,7 +451,6 @@
                 carrito.push({ id, nombre, precio, cantidad });
             }
 
-            // Guardar en localStorage
             localStorage.setItem('carrito', JSON.stringify(carrito));
             actualizarContadorCarrito();
 
@@ -466,7 +458,6 @@
             cerrarModal();
         }
 
-        // Inicializar
         document.addEventListener('DOMContentLoaded', () => {
             cargarProductos();
             actualizarContadorCarrito();
