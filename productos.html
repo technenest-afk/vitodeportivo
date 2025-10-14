@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo | Vito Deportivo</title>
     <style>
-        /* CSS BÁSICO PARA EL CATÁLOGO - Puedes reemplazar esto con tu plantilla */
+        /* CSS BÁSICO PARA EL CATÁLOGO */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -18,12 +18,19 @@
             padding: 15px 20px;
             text-align: center;
         }
+        header a { /* Estilo para el botón de volver a inicio */
+            color: white;
+            text-decoration: none;
+            float: left;
+            font-weight: bold;
+            margin-left: 10px;
+        }
         .contenedor-productos {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             padding: 20px;
-            gap: 20px; /* Espacio entre las tarjetas */
+            gap: 20px; 
         }
         .producto-card {
             background-color: white;
@@ -36,13 +43,13 @@
         }
         .producto-card img {
             width: 100%;
-            height: 250px; /* Altura fija para uniformidad */
-            object-fit: cover; /* Asegura que la imagen cubra el área */
+            height: 250px; 
+            object-fit: cover; 
             border-radius: 4px;
             margin-bottom: 10px;
         }
         .producto-card h3 {
-            color: #ff6600; /* Color de marca simulado */
+            color: #ff6600; 
             margin: 10px 0;
         }
         .producto-card p {
@@ -69,6 +76,7 @@
 <body>
 
     <header>
+        <a href="index.html">← Inicio</a>
         <h1>Catálogo Oficial Vito Deportivo</h1>
     </header>
 
@@ -77,9 +85,10 @@
         <div class="producto-card">
             <img src="https://via.placeholder.com/300x250/FF6600/FFFFFF?text=CAMISETA+RUNNING" alt="Camiseta Técnica de Running">
             <h3>Camiseta Térmica Racer</h3>
-            <p>Precio: $8.990</p>
+            <p>Precio: $8.990 ARS</p>
+            <p style="font-size:0.9em; font-weight: normal; color: #666;">Tallas S, M, L. Colores: Negro, Naranja.</p>
             <a 
-                href="https://wa.me/XXXXXXXXXXX?text=Hola%2C%20me%20interesa%20comprar%20la%20*Camiseta%20T%C3%A9rmica%20Racer*%20(Color%20y%20Talla%20a%20especificar).%20Por%20favor%2C%20confirmen%20stock%20y%20pasos%20de%20pago."
+                href="https://wa.me/542267524958?text=Hola%2C%20me%20interesa%20comprar%20la%20*Camiseta%20T%C3%A9rmica%20Racer*%20(Indicar%20Color%20y%20Talla).%20Por%20favor%2C%20confirmen%20stock%20y%20pasos%20de%20pago."
                 target="_blank" 
                 class="boton-whatsapp"
             >
@@ -90,9 +99,10 @@
         <div class="producto-card">
             <img src="https://via.placeholder.com/300x250/000000/FFFFFF?text=SHORT+ENTRENAMIENTO" alt="Short de Entrenamiento">
             <h3>Short Funcional Pro</h3>
-            <p>Precio: $6.500</p>
+            <p>Precio: $6.500 ARS</p>
+            <p style="font-size:0.9em; font-weight: normal; color: #666;">Tallas S, M, L, XL. Colores: Negro, Gris.</p>
             <a 
-                href="https://wa.me/XXXXXXXXXXX?text=Hola%2C%20me%20interesa%20comprar%20el%20*Short%20Funcional%20Pro*%20(Color%20y%20Talla%20a%20especificar).%20Por%20favor%2C%20confirmen%20stock%20y%20pasos%20de%20pago."
+                href="https://wa.me/542267524958?text=Hola%2C%20me%20interesa%20comprar%20el%20*Short%20Funcional%20Pro*%20(Indicar%20Color%20y%20Talla).%20Por%20favor%2C%20confirmen%20stock%20y%20pasos%20de%20pago."
                 target="_blank" 
                 class="boton-whatsapp"
             >
@@ -103,9 +113,10 @@
         <div class="producto-card">
             <img src="https://via.placeholder.com/300x250/007bff/FFFFFF?text=GORRA+DEPORTIVA" alt="Gorra Deportiva">
             <h3>Gorra Clásica Fit</h3>
-            <p>Precio: $3.990</p>
+            <p>Precio: $3.990 ARS</p>
+            <p style="font-size:0.9em; font-weight: normal; color: #666;">Talla única. Colores: Azul, Negro, Blanco.</p>
             <a 
-                href="https://wa.me/XXXXXXXXXXX?text=Hola%2C%20me%20interesa%20comprar%20la%20*Gorra%20Cl%C3%A1sica%20Fit*.%20Por%20favor%2C%20confirmen%20stock%20y%20pasos%20de%20pago."
+                href="https://wa.me/542267524958?text=Hola%2C%20me%20interesa%20comprar%20la%20*Gorra%20Cl%C3%A1sica%20Fit*%20(Indicar%20Color).%20Por%20favor%2C%20confirmen%20stock%20y%20pasos%20de%20pago."
                 target="_blank" 
                 class="boton-whatsapp"
             >
