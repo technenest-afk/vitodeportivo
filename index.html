@@ -24,6 +24,18 @@
             text-align: center;
         }
         
+        /* ESTILO DEL ENCABEZADO (Header) para el logo */
+        header {
+            background-color: var(--color-fondo);
+            padding: 15px 40px;
+            border-bottom: 1px solid var(--color-borde);
+            text-align: center;
+        }
+        header .logo {
+            height: 50px; /* Ajusta el tamaño del logo según necesites */
+            width: auto;
+        }
+
         /* Contenido principal para centrar el HERO */
         .main-content {
             display: flex;
@@ -42,13 +54,13 @@
             font-size: 4em;
             color: var(--color-principal);
             margin-bottom: 0.1em;
-            letter-spacing: -1px; /* Letras más ajustadas */
-            font-weight: 300; /* Fuente ligera */
+            letter-spacing: -1px; 
+            font-weight: 300; 
         }
         
         .hero-section p {
             font-size: 1.2em;
-            color: #666666; /* Un gris más suave */
+            color: #666666; 
             margin-bottom: 30px;
             line-height: 1.6;
         }
@@ -59,7 +71,7 @@
             color: white;
             padding: 12px 30px;
             text-decoration: none;
-            border-radius: 30px; /* Bordes redondeados sutiles */
+            border-radius: 30px; 
             font-size: 1.1em;
             font-weight: bold;
             transition: background-color 0.3s, box-shadow 0.3s;
@@ -89,6 +101,10 @@
     </style>
 </head>
 <body>
+
+    <header>
+        <img src="img/vitologo.png" alt="Vito Deportivo Logo" class="logo">
+    </header>
 
     <div class="main-content">
         <div class="hero-section">
