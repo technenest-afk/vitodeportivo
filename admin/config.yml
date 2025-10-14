@@ -1,0 +1,31 @@
+backend:
+  # Usa Git Gateway para autenticación con Netlify
+  name: git-gateway
+  branch: main # Debe ser la rama principal de tu repositorio
+
+# Configuramos dónde se guardarán las imágenes subidas por el administrador
+media_folder: "img"
+public_folder: "/img" 
+
+# Definición de la "Colección" de productos que la administradora puede editar
+collections:
+  - name: "productos"
+    label: "Catálogo de Productos"
+    # El CMS editará el archivo productos.js
+    files:
+      - file: "productos.js"
+        label: "Lista de Productos"
+        name: "productosList"
+        fields:
+          # Define la variable 'productos' que está en productos.js (const productos = [...])
+          - label: "Lista de Productos"
+            name: "productos"
+            widget: "list"
+            summary: "{{fields.nombre}} - $ {{fields.precio}}"
+            # Los campos que la administradora verá para cada producto:
+            fields:
+              - {label: "ID Único", name: "id", widget: "string", required: true, hint: "Ej: CR001 (No cambiar después de crear)"}
+              - {label: "Nombre del Producto", name: "nombre", widget: "string", required: true}
+              - {label: "Precio (sin signo $)", name: "precio", widget: "number", value_type: "int", required: true, min: 1}
+              - {label: "Imagen del Producto", name: "imagen", widget: "image", required: true, hint: "Sube una foto aquí"}
+              - {label: "Detalles / Tallas", name: "detalles", widget: "string", required: false}
