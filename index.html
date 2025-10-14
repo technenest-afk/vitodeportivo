@@ -3,123 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vito Deportivo | Ropa y Accesorios Funcionales</title>
+    <title>Vito Deportivo | Ropa Funcional</title>
     <style>
-        /* CSS BÁSICO PARA EL INDEX */
+        :root {
+            --color-principal: #ff6600; /* Naranja Vito Deportivo (para acentos) */
+            --color-fondo: #ffffff; /* Fondo Blanco */
+            --color-texto-oscuro: #333333; /* Texto Gris Oscuro */
+            --color-borde: #eeeeee; /* Borde muy sutil */
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: var(--color-fondo);
+            color: var(--color-texto-oscuro);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
             text-align: center;
         }
-        header {
-            background-color: #000;
-            color: white;
-            padding: 20px 0;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2.5em;
-            color: #ff6600; /* Color de acento */
-        }
-        .main-hero {
-            /* REEMPLAZAR URL CON UNA FOTO DE ACCIÓN REAL DE VITO DEPORTIVO */
-            background-image: url('https://via.placeholder.com/1200x500/333333/FFFFFF?text=FOTO+PRINCIPAL+DEPORTE'); 
-            background-size: cover;
-            background-position: center;
-            height: 50vh;
+        
+        /* Contenido principal para centrar el HERO */
+        .main-content {
             display: flex;
-            align-items: center;
             justify-content: center;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-        }
-        .hero-content {
-            color: white;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
-        }
-        .hero-content h2 {
-            font-size: 3em;
-            margin-bottom: 10px;
-        }
-        .hero-content p {
-            font-size: 1.5em;
-            margin-bottom: 25px;
-        }
-        .boton-catalogo {
-            display: inline-block;
-            background-color: #ff6600; /* Color de acento */
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            font-size: 1.2em;
-            transition: background-color 0.3s;
-        }
-        .boton-catalogo:hover {
-            background-color: #cc5200;
-        }
-        .seccion {
+            align-items: center;
+            flex-grow: 1; 
             padding: 40px 20px;
         }
-        .seccion h2 {
-            font-size: 2em;
-            color: #333;
-            border-bottom: 2px solid #ff6600;
-            display: inline-block;
-            padding-bottom: 5px;
+
+        .hero-section {
+            max-width: 700px;
+            padding: 40px;
+        }
+
+        .hero-section h1 {
+            font-size: 4em;
+            color: var(--color-principal);
+            margin-bottom: 0.1em;
+            letter-spacing: -1px; /* Letras más ajustadas */
+            font-weight: 300; /* Fuente ligera */
+        }
+        
+        .hero-section p {
+            font-size: 1.2em;
+            color: #666666; /* Un gris más suave */
             margin-bottom: 30px;
+            line-height: 1.6;
         }
-        footer {
-            background-color: #333;
+
+        .boton-catalogo {
+            display: inline-block;
+            background-color: var(--color-principal);
             color: white;
-            padding: 20px 0;
-            margin-top: 40px;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 30px; /* Bordes redondeados sutiles */
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        footer p {
-            margin: 5px 0;
+
+        .boton-catalogo:hover {
+            background-color: #e65c00;
+            box-shadow: 0 4px 10px rgba(255, 102, 0, 0.4);
+        }
+
+        /* ESTILO DEL FOOTER */
+        footer {
+            width: 100%;
+            padding: 20px 0;
+            background-color: var(--color-fondo);
+            color: #999999;
+            font-size: 0.8em;
+            border-top: 1px solid var(--color-borde);
+            text-align: center;
+        }
+        footer a {
+            color: var(--color-principal);
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>VITO DEPORTIVO</h1>
-    </header>
-
-    <div class="main-hero">
-        <div class="hero-content">
-            <h2>RENDIMIENTO SIN LÍMITES</h2>
-            <p>La mejor ropa deportiva funcional para llevar tu entrenamiento al siguiente nivel.</p>
-            <a href="productos.html" class="boton-catalogo">VER CATÁLOGO COMPLETO</a>
-        </div>
-    </div>
-
-    <div class="seccion">
-        <h2>¿Por Qué Elegirnos?</h2>
-        <div style="display: flex; justify-content: space-around; max-width: 800px; margin: 0 auto;">
-            <div>
-                <h3>Tecnología Dry-Fit</h3>
-                <p>Tejidos que absorben el sudor y secan rápidamente.</p>
-            </div>
-            <div>
-                <h3>Diseño y Estilo</h3>
-                <p>Ropa que se siente bien y se ve increíble dentro y fuera del gimnasio.</p>
-            </div>
-            <div>
-                <h3>Precios Justos</h3>
-                <p>Máxima calidad sin sacrificar tu presupuesto.</p>
-            </div>
+    <div class="main-content">
+        <div class="hero-section">
+            <h1>VITO DEPORTIVO</h1>
+            <p>Ropa funcional con diseño minimalista para maximizar tu rendimiento. <br> Entrena con ligereza, muévete con propósito.</p>
+            <a href="productos.html" class="boton-catalogo">EXPLORAR LA COLECCIÓN</a>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2025 Vito Deportivo. Todos los derechos reservados.</p>
-        <p>Síguenos en <a href="https://www.instagram.com/vitodeportivo" target="_blank" style="color: #ff6600;">Instagram</a></p>
+        &copy; 2025 Vito Deportivo. | Diseño por <a href="https://technenest.com" target="_blank">Techne Nest</a>.
     </footer>
 
 </body>
