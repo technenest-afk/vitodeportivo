@@ -16,7 +16,11 @@
             font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--color-fondo);
+            /* CAMBIOS DE FONDO */
+            background-image: url('https://static.vecteezy.com/system/resources/previews/002/677/456/non_2x/white-grey-cement-concrete-textured-background-soft-natural-wall-backdrop-for-aesthetic-creative-design-free-photo.jpg');
+            background-repeat: repeat; 
+            background-attachment: fixed;
+            background-color: var(--color-fondo); /* Fallback */
             color: var(--color-texto-oscuro);
             display: flex;
             flex-direction: column;
@@ -32,7 +36,7 @@
             text-align: center;
         }
         header .logo {
-            height: 50px; /* Ajusta el tamaño del logo según necesites */
+            height: 60px; /* Logo más grande */
             width: auto;
         }
 
@@ -43,11 +47,16 @@
             align-items: center;
             flex-grow: 1; 
             padding: 40px 20px;
+            /* Fondo del contenido (opcional, si quieres que la textura se vea solo afuera del contenido) */
+            /* background-color: rgba(255, 255, 255, 0.8); */
         }
 
         .hero-section {
             max-width: 700px;
             padding: 40px;
+            background-color: rgba(255, 255, 255, 0.95); /* Semi-transparente para destacar sobre el fondo */
+            border-radius: 5px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
         }
 
         .hero-section h1 {
