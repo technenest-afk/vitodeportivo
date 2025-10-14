@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vito Deportivo | Ropa Funcional</title>
     <style>
+        /* ------------------------------------------- */
+        /* CSS BASADO EN ESTILO MODERNO CLARO Y LIMPIO */
+        /* ------------------------------------------- */
+        
         :root {
-            --color-principal: #ff6600; /* Naranja Vito Deportivo (para acentos) */
-            --color-fondo: #ffffff; /* Fondo Blanco */
+            --color-principal: #ff6600; /* Naranja Vito Deportivo (acentos) */
+            --color-fondo: #f9f9f9; /* Fondo Gris Cemento muy CLARO */
             --color-texto-oscuro: #333333; /* Texto Gris Oscuro */
+            --color-header: #ffffff; /* Header Blanco Puro */
             --color-borde: #eeeeee; /* Borde muy sutil */
         }
 
@@ -16,11 +21,7 @@
             font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            /* CAMBIOS DE FONDO */
-            background-image: url('https://static.vecteezy.com/system/resources/previews/002/677/456/non_2x/white-grey-cement-concrete-textured-background-soft-natural-wall-backdrop-for-aesthetic-creative-design-free-photo.jpg');
-            background-repeat: repeat; 
-            background-attachment: fixed;
-            background-color: var(--color-fondo); /* Fallback */
+            background-color: var(--color-fondo); /* Fondo muy claro */
             color: var(--color-texto-oscuro);
             display: flex;
             flex-direction: column;
@@ -28,15 +29,21 @@
             text-align: center;
         }
         
-        /* ESTILO DEL ENCABEZADO (Header) para el logo */
+        /* ESTILO DEL ENCABEZADO (Header) - AHORA STICKY */
         header {
-            background-color: var(--color-fondo);
+            background-color: var(--color-header);
             padding: 15px 40px;
             border-bottom: 1px solid var(--color-borde);
             text-align: center;
+            
+            /* PROPIEDADES STICKY */
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05); /* Sombra sutil */
         }
         header .logo {
-            height: 60px; /* Logo más grande */
+            height: 60px; 
             width: auto;
         }
 
@@ -47,21 +54,19 @@
             align-items: center;
             flex-grow: 1; 
             padding: 40px 20px;
-            /* Fondo del contenido (opcional, si quieres que la textura se vea solo afuera del contenido) */
-            /* background-color: rgba(255, 255, 255, 0.8); */
         }
 
         .hero-section {
             max-width: 700px;
-            padding: 40px;
-            background-color: rgba(255, 255, 255, 0.95); /* Semi-transparente para destacar sobre el fondo */
+            padding: 50px;
+            background-color: var(--color-header); /* Caja principal blanca */
             border-radius: 5px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            box-shadow: 0 0 15px rgba(0,0,0,0.1); 
         }
 
         .hero-section h1 {
             font-size: 4em;
-            color: var(--color-principal);
+            color: var(--color-texto-oscuro); /* Títulos negros */
             margin-bottom: 0.1em;
             letter-spacing: -1px; 
             font-weight: 300; 
@@ -76,32 +81,34 @@
 
         .boton-catalogo {
             display: inline-block;
-            background-color: var(--color-principal);
+            background-color: var(--color-texto-oscuro); /* Botón principal NEGRO (como Discobolo) */
             color: white;
             padding: 12px 30px;
             text-decoration: none;
-            border-radius: 30px; 
+            border-radius: 0; /* Bordes rectos */
             font-size: 1.1em;
-            font-weight: bold;
-            transition: background-color 0.3s, box-shadow 0.3s;
+            font-weight: 500;
+            transition: background-color 0.3s;
             text-transform: uppercase;
             letter-spacing: 1px;
+            border: 1px solid var(--color-texto-oscuro);
         }
 
         .boton-catalogo:hover {
-            background-color: #e65c00;
-            box-shadow: 0 4px 10px rgba(255, 102, 0, 0.4);
+            background-color: var(--color-principal); /* Hover al naranja */
+            border-color: var(--color-principal);
         }
 
         /* ESTILO DEL FOOTER */
         footer {
             width: 100%;
             padding: 20px 0;
-            background-color: var(--color-fondo);
+            background-color: var(--color-header);
             color: #999999;
             font-size: 0.8em;
             border-top: 1px solid var(--color-borde);
             text-align: center;
+            margin-top: auto;
         }
         footer a {
             color: var(--color-principal);
