@@ -37,18 +37,20 @@
         /* 1. ESTILO DEL ENCABEZADO (Header) */
         header {
             background-color: var(--color-fondo);
-            padding: 20px 40px;
+            padding: 15px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--color-borde);
         }
-        header h1 {
-            font-size: 1.5em;
-            letter-spacing: 0.5px;
-            margin: 0;
-            color: var(--color-texto-oscuro);
-            font-weight: 500;
+        header .logo {
+            height: 40px; /* Tamaño del logo */
+            width: auto;
+        }
+        header .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px; /* Espacio entre los enlaces */
         }
         header a {
             color: var(--color-texto-oscuro);
@@ -186,7 +188,7 @@
             font-size: 0.8em;
             border-top: 1px solid var(--color-borde);
             text-align: center;
-            margin-top: auto; /* Empuja el footer hacia abajo */
+            margin-top: auto; 
         }
         footer a {
             color: var(--color-principal);
@@ -197,9 +199,11 @@
 <body>
 
     <header>
-        <a href="productos.html" class="boton-catalogo">← VOLVER AL CATÁLOGO</a>
-        <h1>VITO DEPORTIVO</h1>
-        <a href="index.html">INICIO</a>
+        <img src="img/vitologo.png" alt="Vito Deportivo Logo" class="logo">
+        <div class="nav-links">
+            <a href="index.html">INICIO</a>
+            <a href="productos.html" class="boton-catalogo">CATÁLOGO</a>
+        </div>
     </header>
 
     <div class="main-content">
@@ -250,6 +254,8 @@
 
         // 1. Renderiza los items del carrito
         function renderizarCarrito() {
+            // Limpiamos los ítems que puedan haberse eliminado con cantidad 0
+            carrito = carrito.filter(item => item.cantidad > 0);
             carritoTablaBody.innerHTML = '';
             let total = 0;
 
@@ -292,6 +298,8 @@
             const nuevaCantidad = parseInt(e.target.value);
 
             if (isNaN(nuevaCantidad) || nuevaCantidad < 1) {
+                // Si el usuario borra o pone 0, lo forzamos a 1, o lo eliminamos.
+                // Aquí lo forzamos a 1 para mejor UX, pero se podría eliminar también.
                 e.target.value = 1;
                 return;
             }
@@ -325,9 +333,6 @@
             }
 
             const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
-            
-            // Aquí iría la lógica real de pago (Mercado Pago, transferencia, etc.)
-            // Por ahora, es un mensaje de confirmación
             
             const mensaje = `¡Gracias por tu compra en Vito Deportivo!\n\nTotal a pagar: ${formatearPrecio(total)}.\n\nEn breve nos pondremos en contacto para coordinar el pago y el envío.`;
             
