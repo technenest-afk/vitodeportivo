@@ -3,464 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo | Vito Deportivo</title>
+    <title>Vito Deportivo - Catálogo</title>
     <style>
-        /* ------------------------------------------- */
-        /* CSS BASADO EN ESTILO MODERNO CLARO Y LIMPIO con Header Negro */
-        /* ------------------------------------------- */
-        
-        :root {
-            --color-principal: #ff6600; /* Naranja Vito Deportivo (acentos) */
-            --color-fondo: #f9f9f9; /* Fondo Gris Cemento muy CLARO */
-            --color-texto-oscuro: #333333;
-            --color-header-fondo: #000000; /* Fondo del Header NEGRO */
-            --color-header-texto: #ffffff; /* Texto del Header BLANCO */
-            --color-borde: #eeeeee; /* Borde muy sutil */
-        }
-
+        /* Estilos CSS BÁSICOS de la tienda */
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--color-fondo);
-            color: var(--color-texto-oscuro);
-            display: flex;
-            flex-direction: column; 
-            min-height: 100vh;
+            background-color: #f0f2f5;
         }
-        
-        .main-content {
-            flex-grow: 1;
-        }
-
-        /* 1. ESTILO DEL ENCABEZADO (Header) - AHORA STICKY Y NEGRO */
         header {
-            background-color: var(--color-header-fondo); /* Fondo NEGRO */
-            padding: 15px 40px; 
+            background-color: #ff4500; /* Naranja Deportivo */
+            color: white;
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1); 
-            
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        header .logo {
-            height: 60px; 
-            width: auto;
-            margin-right: auto; 
-            /* Se remueve filter: invert(1) */
+        header h1 {
+            margin: 0;
+            font-size: 1.8em;
         }
-        header .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 20px; 
-        }
-        header a {
-            color: var(--color-header-texto); /* Texto del header BLANCO */
-            text-decoration: none;
-            font-weight: 500;
-            padding: 5px 10px;
-            transition: color 0.3s;
-            font-size: 0.95em;
-        }
-        header a:hover {
-            color: var(--color-principal);
-        }
-        .boton-carrito {
-            background-color: transparent;
-            border: 1px solid var(--color-principal); /* Borde naranja */
-            color: var(--color-principal); /* Texto naranja */
-            padding: 8px 15px;
-            border-radius: 0;
-            font-size: 0.9em;
-            font-weight: 500;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .boton-carrito:hover {
-            background-color: var(--color-principal);
-            border-color: var(--color-principal);
+        nav a {
             color: white;
-        }
-
-        /* 2. DISEÑO DEL CONTENEDOR DE PRODUCTOS (Grid) */
-        .contenedor-productos {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 40px;
-            padding: 60px 40px;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        /* 3. DISEÑO DE LA TARJETA DE PRODUCTO (Card) */
-        .producto-card {
-            background-color: white; 
-            border: 1px solid var(--color-borde);
-            border-radius: 0;
-            padding: 0;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05); 
-            text-align: left; 
-            transition: box-shadow 0.3s;
-            cursor: pointer; 
-        }
-        .producto-card:hover {
-            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-        }
-        .producto-card img {
-            width: 100%;
-            height: 350px; 
-            object-fit: cover;
-            border-radius: 0;
-            margin-bottom: 10px;
-        }
-        .producto-card h3 {
-            color: var(--color-texto-oscuro);
-            font-size: 1.1em;
-            margin: 10px 10px 0 10px;
-            font-weight: 500;
-            text-transform: uppercase;
-        }
-        .producto-card .precio {
-            font-size: 1.1em;
-            color: #666; 
-            font-weight: 300;
-            margin: 5px 10px 10px 10px;
-        }
-        
-        /* 4. ESTILO DEL BOTÓN DE AGREGAR EN LISTA */
-        .boton-agregar-lista {
-            background-color: var(--color-texto-oscuro); 
-            color: white;
-            padding: 10px 0;
             text-decoration: none;
-            border: 1px solid var(--color-texto-oscuro);
-            border-radius: 0;
-            font-weight: 500;
-            cursor: pointer;
-            width: 100%;
-            text-transform: uppercase;
-            font-size: 0.9em;
-            transition: background-color 0.3s, color 0.3s;
+            margin-left: 20px;
+            font-weight: bold;
         }
-        .boton-agregar-lista:hover {
-            background-color: var(--color-principal);
-            border-color: var(--color-principal);
+        nav a:hover {
+            text-decoration: underline;
         }
-        
-        /* 5. ESTILO DEL FOOTER */
-        footer {
-            width: 100%;
-            padding: 20px 0;
-            background-color: white;
-            color: #999999;
-            font-size: 0.8em;
-            border-top: 1px solid var(--color-borde);
-            text-align: center;
-            margin-top: auto;
-        }
-        footer a {
-            color: var(--color-principal);
-            text-decoration: none;
-        }
-        
-        /* ------------------------------------------- */
-        /* CSS DEL MODAL (PÁGINA DE DETALLE) */
-        /* ------------------------------------------- */
-        .modal {
-            display: none; 
-            position: fixed;
-            z-index: 100;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.6); 
-            padding-top: 60px;
-        }
-
-        .modal-contenido {
-            background-color: white; 
-            margin: 5% auto;
-            padding: 30px;
-            border: 1px solid #888;
-            width: 90%; 
-            max-width: 900px;
-            border-radius: 5px;
-            display: flex;
-            gap: 30px;
+        .carrito-link {
             position: relative;
         }
-        
-        .modal-imagen-col {
-            flex: 1;
-        }
-        .modal-imagen-col img {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            border-radius: 3px;
-        }
-
-        .modal-info-col {
-            flex: 1;
-            text-align: left;
-            padding-left: 20px;
-        }
-        
-        .modal-info-col h2 {
-            font-size: 2.5em;
-            margin-top: 0;
-            margin-bottom: 10px;
-            font-weight: 300;
-        }
-        
-        .modal-precio {
-            font-size: 1.8em;
-            color: var(--color-principal);
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        
-        .modal-detalles {
-            font-size: 1em;
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 30px;
-            white-space: pre-wrap; 
-        }
-        
-        .cantidad-selector {
-            display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-        .cantidad-selector label {
-            font-weight: 500;
-            margin-right: 15px;
-            text-transform: uppercase;
-        }
-        .cantidad-selector input {
-            width: 60px;
-            padding: 10px;
-            text-align: center;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-            font-size: 1em;
-        }
-
-        .boton-agregar-modal {
-            width: 100%;
-            padding: 15px;
-            font-size: 1.1em;
-            background-color: var(--color-texto-oscuro);
+        #contador-carrito {
+            background-color: #333;
             color: white;
-            border: 1px solid var(--color-texto-oscuro);
-            border-radius: 0;
-        }
-        .boton-agregar-modal:hover {
-            background-color: var(--color-principal);
-            border-color: var(--color-principal);
-        }
-        
-        .cerrar-modal {
+            border-radius: 50%;
+            padding: 2px 7px;
+            font-size: 0.7em;
             position: absolute;
-            top: 10px;
-            right: 25px;
-            color: #aaa;
-            font-size: 30px;
+            top: -10px;
+            right: -10px;
+            min-width: 15px;
+            text-align: center;
+        }
+        .main-content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        #productos-contenedor {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        .producto-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        .producto-card:hover {
+            transform: translateY(-5px);
+        }
+        .producto-imagen {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        .producto-card h3 {
+            font-size: 1.3em;
+            margin: 15px 0 5px;
+            color: #333;
+        }
+        .producto-precio {
+            font-size: 1.5em;
+            color: #ff4500;
             font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .producto-acciones button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 5px;
             cursor: pointer;
+            transition: background-color 0.2s;
         }
-        .cerrar-modal:hover,
-        .cerrar-modal:focus {
-            color: var(--color-principal);
-            text-decoration: none;
+        .boton-comprar {
+            background-color: #4CAF50 !important;
         }
-        
-        /* RESPONSIVE */
-        @media (max-width: 950px) {
-            .modal-contenido {
-                flex-direction: column;
-                margin: 20px auto;
-                width: 95%;
-            }
-            .modal-imagen-col img {
-                height: 300px;
-            }
-            .modal-info-col {
-                padding-left: 0;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            header { padding: 15px 10px; }
-            .contenedor-productos { grid-template-columns: 1fr; padding: 20px; }
-            header .nav-links { gap: 10px; }
+        .producto-acciones button:hover {
+            background-color: #ff5722;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <img src="img/517401391_17909253798177464_8167142829808248451_n.jpg" alt="Vito Deportivo Logo" class="logo">
-        <div class="nav-links">
-            <a href="index.html">INICIO</a>
-            <a href="carrito.html" class="boton-carrito">CARRITO (0)</a>
-        </div>
+        <h1>Vito Deportivo</h1>
+        <nav>
+            <a href="productos.html">Catálogo</a>
+            <a href="carrito.html" class="carrito-link">
+                Carrito (<span id="contador-carrito">0</span>)
+            </a>
+            <a href="https://[URL-DE-TU-VERCEL-ADMIN-PANEL]" target="_blank">Admin</a>
+        </nav>
     </header>
 
     <div class="main-content">
-        <div class="contenedor-productos">
-            </div>
-    </div>
-
-    <footer>
-        &copy; 2025 Vito Deportivo. | Diseño por <a href="https://technenest.com" target="_blank">Techne Nest</a>.
-    </footer>
-
-    <div id="detalle-modal" class="modal" onclick="cerrarModalExterno(event)">
-        <div class="modal-contenido">
-            <span class="cerrar-modal" onclick="cerrarModal()">&times;</span>
-            <div class="modal-imagen-col">
-                <img id="modal-imagen" src="" alt="Imagen del Producto">
-            </div>
-            <div class="modal-info-col">
-                <h2 id="modal-nombre"></h2>
-                <p id="modal-precio" class="modal-precio"></p>
-                <p id="modal-detalles" class="modal-detalles"></p>
-                
-                <div class="cantidad-selector">
-                    <label for="cantidad-input">Cantidad:</label>
-                    <input type="number" id="cantidad-input" value="1" min="1">
-                </div>
-                
-                <button 
-                    class="boton-agregar-modal boton-agregar-lista"
-                    id="boton-agregar-modal"
-                >
-                    AÑADIR AL CARRITO
-                </button>
-            </div>
+        <h2>Nuestros Productos</h2>
+        <div id="productos-contenedor">
+            <p>Cargando productos...</p>
         </div>
     </div>
-    <script src="productos.js"></script>
+
     <script>
-        const contenedorProductos = document.querySelector('.contenedor-productos');
-        const botonCarritoHeader = document.querySelector('.boton-carrito');
-        const modal = document.getElementById('detalle-modal');
-        const modalImagen = document.getElementById('modal-imagen');
-        const modalNombre = document.getElementById('modal-nombre');
-        const modalPrecio = document.getElementById('modal-precio');
-        const modalDetalles = document.getElementById('modal-detalles');
-        const cantidadInput = document.getElementById('cantidad-input');
-        const botonAgregarModal = document.getElementById('boton-agregar-modal');
+        // *****************************************************************
+        // >>>>>>>>>>>>>>>>>> CONFIGURACIÓN DE MONGODB ATLAS <<<<<<<<<<<<<<<
+        // CLAVES DE DATA API FINALES
+        const MONGODB_API_KEY = '1d6aca63-0b04-441e-a383-329ad4eb5540'; 
+        const MONGODB_BASE_URL = 'https://data.mongodb-api.com/app/68eeb40abfc39a6aeb5ee03a/endpoint/data/v1'; 
 
+        const MONGODB_PAYLOAD = JSON.stringify({
+            "collection": "productos", 
+            "database": "vitodeportivo", 
+            "dataSource": "Cluster0", 
+            "filter": {} 
+        });
+        const MONGODB_FIND_URL = `${MONGODB_BASE_URL}/action/find`; 
+        // *****************************************************************
+
+        let productos = [];
+        const contenedorProductos = document.getElementById('productos-contenedor');
         let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-        let productoSeleccionado = null; 
-
-        function actualizarContadorCarrito() {
-            const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
-            botonCarritoHeader.textContent = `CARRITO (${totalItems})`;
-        }
 
         function formatearPrecio(precio) {
-            return precio.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0 });
+            const numPrecio = Number(precio); 
+            if (isNaN(numPrecio)) return '$0';
+            return numPrecio.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0 });
         }
 
         function cargarProductos() {
-            if (typeof productos === 'undefined' || productos.length === 0) {
-                contenedorProductos.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; margin-top: 50px;">No hay productos disponibles en este momento.</p>';
-                return;
-            }
-
-            contenedorProductos.innerHTML = ''; 
-
+            let htmlContent = '';
             productos.forEach(producto => {
-                const card = document.createElement('div');
-                card.classList.add('producto-card');
-                card.onclick = () => abrirModal(producto.id);
-
-                const precioFormateado = formatearPrecio(producto.precio);
-
-                card.innerHTML = `
-                    <img src="${producto.imagen}" alt="${producto.nombre}">
-                    <h3>${producto.nombre}</h3>
-                    <p class="precio">${precioFormateado}</p>
-                    <button class="boton-agregar-lista" data-id="${producto.id}" onclick="event.stopPropagation(); abrirModal(this.dataset.id);">
-                        VER DETALLES
-                    </button>
+                htmlContent += `
+                    <div class="producto-card" data-id="${producto.id}">
+                        <img src="${producto.imagen || 'img/placeholder.jpg'}" alt="${producto.nombre}" class="producto-imagen">
+                        <h3>${producto.nombre}</h3>
+                        <p class="producto-precio">${formatearPrecio(producto.precio)}</p>
+                        <div class="producto-acciones">
+                            <button class="boton-detalle" onclick="mostrarDetalle('${producto.id}')">Detalles</button>
+                            <button class="boton-comprar" onclick="agregarAlCarrito('${producto.id}', '${producto.nombre}', ${producto.precio})">Añadir al Carrito</button>
+                        </div>
+                    </div>
                 `;
-
-                contenedorProductos.appendChild(card);
             });
+            contenedorProductos.innerHTML = htmlContent;
         }
 
-        function abrirModal(id) {
-            productoSeleccionado = productos.find(p => p.id === id);
-            
-            if (!productoSeleccionado) return;
+        async function obtenerProductosDeAPI() {
+            try {
+                const response = await fetch(MONGODB_FIND_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'api-key': MONGODB_API_KEY },
+                    body: MONGODB_PAYLOAD 
+                });
 
-            modalImagen.src = productoSeleccionado.imagen;
-            modalNombre.textContent = productoSeleccionado.nombre;
-            modalPrecio.textContent = formatearPrecio(productoSeleccionado.precio);
-            modalDetalles.textContent = productoSeleccionado.detalles || 'Sin detalles adicionales.';
-            
-            cantidadInput.value = 1;
-            
-            botonAgregarModal.dataset.id = productoSeleccionado.id;
-            botonAgregarModal.dataset.nombre = productoSeleccionado.nombre;
-            botonAgregarModal.dataset.precio = productoSeleccionado.precio;
-            
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden'; 
-        }
+                if (!response.ok) {
+                    throw new Error(`Error al conectar con la API: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.documents && data.documents.length > 0) {
+                    productos = data.documents.map(doc => ({
+                        id: doc._id, 
+                        nombre: doc.nombre, 
+                        precio: parseFloat(doc.precio) || 0,
+                        imagen: doc.imagen || 'img/placeholder.jpg', 
+                        detalles: doc.detalles 
+                    })).filter(p => p.nombre); 
 
-        function cerrarModal() {
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto'; 
-            productoSeleccionado = null;
-        }
-
-        function cerrarModalExterno(e) {
-            if (e.target === modal) {
-                cerrarModal();
+                    cargarProductos();
+                } else {
+                    contenedorProductos.innerHTML = '<p style="text-align: center; margin-top: 50px;">No hay productos cargados en la base de datos.</p>';
+                }
+            } catch (error) {
+                console.error("Error fetching products:", error);
+                contenedorProductos.innerHTML = `<p style="text-align: center; margin-top: 50px; color: red;">Error de conexión con la base de datos. Verifique las reglas de la Data API.</p>`;
             }
         }
         
-        botonAgregarModal.addEventListener('click', agregarAlCarritoDesdeModal);
-
-        function agregarAlCarritoDesdeModal(e) {
-            const id = e.target.dataset.id;
-            const nombre = e.target.dataset.nombre;
-            const precio = parseFloat(e.target.dataset.precio);
-            const cantidad = parseInt(cantidadInput.value);
-
-            if (isNaN(cantidad) || cantidad < 1) {
-                alert("Por favor, selecciona una cantidad válida.");
-                return;
-            }
-
+        function agregarAlCarrito(id, nombre, precio) {
             const itemExistente = carrito.find(item => item.id === id);
-
             if (itemExistente) {
-                itemExistente.cantidad += cantidad;
+                itemExistente.cantidad++;
             } else {
-                carrito.push({ id, nombre, precio, cantidad });
+                carrito.push({ id, nombre, precio, cantidad: 1 });
             }
-
             localStorage.setItem('carrito', JSON.stringify(carrito));
             actualizarContadorCarrito();
+            alert(`${nombre} añadido al carrito.`);
+        }
 
-            alert(`${cantidad} unidad(es) de "${nombre}" añadida(s) al carrito.`);
-            cerrarModal();
+        function actualizarContadorCarrito() {
+            const contador = document.getElementById('contador-carrito');
+            const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+            if (contador) contador.textContent = totalItems;
+        }
+
+        function mostrarDetalle(id) {
+            const producto = productos.find(p => p.id === id);
+            if (producto) {
+                alert(`Detalles de ${producto.nombre}:\n\n${producto.detalles || 'No hay detalles disponibles.'}`);
+            }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            cargarProductos();
+            obtenerProductosDeAPI();
             actualizarContadorCarrito();
         });
     </script>
