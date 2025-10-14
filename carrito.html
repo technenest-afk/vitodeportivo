@@ -20,7 +20,11 @@
             font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--color-fondo);
+            /* CAMBIOS DE FONDO */
+            background-image: url('https://static.vecteezy.com/system/resources/previews/002/677/456/non_2x/white-grey-cement-concrete-textured-background-soft-natural-wall-backdrop-for-aesthetic-creative-design-free-photo.jpg');
+            background-repeat: repeat; 
+            background-attachment: fixed;
+            background-color: var(--color-fondo); /* Fallback */
             color: var(--color-texto-oscuro);
             display: flex;
             flex-direction: column; 
@@ -44,13 +48,13 @@
             border-bottom: 1px solid var(--color-borde);
         }
         header .logo {
-            height: 40px; /* Tamaño del logo */
+            height: 60px; /* Logo más grande */
             width: auto;
         }
         header .nav-links {
             display: flex;
             align-items: center;
-            gap: 20px; /* Espacio entre los enlaces */
+            gap: 20px; 
         }
         header a {
             color: var(--color-texto-oscuro);
@@ -83,12 +87,16 @@
             font-weight: 300;
             margin-bottom: 30px;
             text-align: center;
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo para el título */
+            padding: 10px;
         }
 
         .carrito-tabla {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 30px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 0 10px;
         }
         .carrito-tabla th, .carrito-tabla td {
             text-align: left;
@@ -142,6 +150,8 @@
             border-top: 1px solid var(--color-borde);
             padding-top: 20px;
             margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px 10px 20px 0;
         }
         .total-texto {
             font-size: 1.4em;
@@ -177,6 +187,8 @@
             padding: 50px;
             font-size: 1.2em;
             color: #666;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 5px;
         }
 
         /* ESTILO DEL FOOTER */
@@ -194,6 +206,18 @@
             color: var(--color-principal);
             text-decoration: none;
         }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            header { padding: 15px 10px; }
+            header .logo { height: 40px; }
+            header .nav-links { gap: 10px; }
+            .main-content { margin: 20px auto; }
+            .resumen-carrito { flex-direction: column; align-items: flex-end; }
+            .total-texto, .total-monto { margin-bottom: 15px; margin-right: 0; }
+            .boton-checkout { margin-left: 0; width: 100%; }
+        }
+
     </style>
 </head>
 <body>
@@ -254,7 +278,6 @@
 
         // 1. Renderiza los items del carrito
         function renderizarCarrito() {
-            // Limpiamos los ítems que puedan haberse eliminado con cantidad 0
             carrito = carrito.filter(item => item.cantidad > 0);
             carritoTablaBody.innerHTML = '';
             let total = 0;
@@ -298,8 +321,6 @@
             const nuevaCantidad = parseInt(e.target.value);
 
             if (isNaN(nuevaCantidad) || nuevaCantidad < 1) {
-                // Si el usuario borra o pone 0, lo forzamos a 1, o lo eliminamos.
-                // Aquí lo forzamos a 1 para mejor UX, pero se podría eliminar también.
                 e.target.value = 1;
                 return;
             }
