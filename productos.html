@@ -28,7 +28,7 @@
         }
         
         .main-content {
-            flex-grow: 1; /* Ocupa el espacio restante */
+            flex-grow: 1;
         }
 
         /* 1. ESTILO DEL ENCABEZADO (Header) */
@@ -89,17 +89,16 @@
             border-radius: 0;
             padding: 0;
             box-shadow: none;
-            text-align: left; /* Alineado a la izquierda */
+            text-align: left; 
             transition: opacity 0.3s;
+            cursor: pointer; /* Indica que se puede hacer clic */
         }
         .producto-card:hover {
             opacity: 0.9;
-            transform: none;
-            box-shadow: none;
         }
         .producto-card img {
             width: 100%;
-            height: 350px; /* Fotos grandes */
+            height: 350px; 
             object-fit: cover;
             border-radius: 0;
             margin-bottom: 10px;
@@ -113,16 +112,16 @@
         }
         .producto-card .precio {
             font-size: 1.1em;
-            color: #666666; /* Precio más sutil */
+            color: #666666; 
             font-weight: 300;
             margin: 5px 0 10px 0;
         }
         .producto-card .detalles {
-            display: none; /* Ocultamos los detalles para un look más limpio */
+            display: none; 
         }
         
-        /* 4. ESTILO DEL BOTÓN DE AGREGAR */
-        .boton-agregar {
+        /* 4. ESTILO DEL BOTÓN DE AGREGAR EN LISTA */
+        .boton-agregar-lista {
             background-color: #000000;
             color: white;
             padding: 10px 0;
@@ -136,12 +135,12 @@
             font-size: 0.9em;
             transition: background-color 0.3s, color 0.3s;
         }
-        .boton-agregar:hover {
+        .boton-agregar-lista:hover {
             background-color: var(--color-principal);
             border-color: var(--color-principal);
         }
         
-        /* ESTILO DEL FOOTER */
+        /* 5. ESTILO DEL FOOTER */
         footer {
             width: 100%;
             padding: 20px 0;
@@ -155,23 +154,132 @@
             color: var(--color-principal);
             text-decoration: none;
         }
+        
+        /* ------------------------------------------- */
+        /* CSS DEL MODAL (PÁGINA DE DETALLE) */
+        /* ------------------------------------------- */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7); /* Fondo oscuro transparente */
+            padding-top: 60px;
+        }
 
+        .modal-contenido {
+            background-color: var(--color-fondo);
+            margin: 5% auto;
+            padding: 30px;
+            border: 1px solid #888;
+            width: 90%; 
+            max-width: 900px;
+            border-radius: 5px;
+            display: flex;
+            gap: 30px;
+            position: relative;
+        }
+        
+        .modal-imagen-col {
+            flex: 1;
+        }
+        .modal-imagen-col img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 3px;
+        }
 
-        /* RESPONSIVE BÁSICO */
+        .modal-info-col {
+            flex: 1;
+            text-align: left;
+            padding-left: 20px;
+        }
+        
+        .modal-info-col h2 {
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .modal-precio {
+            font-size: 1.8em;
+            color: var(--color-principal);
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .modal-detalles {
+            font-size: 1em;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            white-space: pre-wrap; /* Respeta los saltos de línea del CMS */
+        }
+        
+        .cantidad-selector {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        .cantidad-selector label {
+            font-weight: 500;
+            margin-right: 15px;
+            text-transform: uppercase;
+        }
+        .cantidad-selector input {
+            width: 60px;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 1em;
+        }
+
+        .boton-agregar-modal {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1em;
+        }
+        
+        .cerrar-modal {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            color: #aaa;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .cerrar-modal:hover,
+        .cerrar-modal:focus {
+            color: var(--color-principal);
+            text-decoration: none;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 950px) {
+            .modal-contenido {
+                flex-direction: column;
+                margin: 20px auto;
+                width: 95%;
+            }
+            .modal-imagen-col img {
+                height: 300px;
+            }
+            .modal-info-col {
+                padding-left: 0;
+            }
+        }
+        
         @media (max-width: 768px) {
-            header {
-                padding: 15px 10px;
-            }
-            header h1 {
-                font-size: 1.2em;
-            }
-            .contenedor-productos {
-                grid-template-columns: 1fr;
-                padding: 20px;
-            }
-            .boton-carrito {
-                padding: 5px 10px;
-            }
+            header { padding: 15px 10px; }
+            .contenedor-productos { grid-template-columns: 1fr; padding: 20px; }
         }
     </style>
 </head>
@@ -192,13 +300,45 @@
         &copy; 2025 Vito Deportivo. | Diseño por <a href="https://technenest.com" target="_blank">Techne Nest</a>.
     </footer>
 
+    <div id="detalle-modal" class="modal" onclick="cerrarModalExterno(event)">
+        <div class="modal-contenido">
+            <span class="cerrar-modal" onclick="cerrarModal()">&times;</span>
+            <div class="modal-imagen-col">
+                <img id="modal-imagen" src="" alt="Imagen del Producto">
+            </div>
+            <div class="modal-info-col">
+                <h2 id="modal-nombre"></h2>
+                <p id="modal-precio" class="modal-precio"></p>
+                <p id="modal-detalles" class="modal-detalles"></p>
+                
+                <div class="cantidad-selector">
+                    <label for="cantidad-input">Cantidad:</label>
+                    <input type="number" id="cantidad-input" value="1" min="1">
+                </div>
+                
+                <button 
+                    class="boton-agregar-modal boton-agregar-lista"
+                    id="boton-agregar-modal"
+                >
+                    AÑADIR AL CARRITO
+                </button>
+            </div>
+        </div>
+    </div>
     <script src="productos.js"></script>
     <script>
-        // --- CÓDIGO JavaScript para Cargar Productos y Carrito ---
-
         const contenedorProductos = document.querySelector('.contenedor-productos');
         const botonCarritoHeader = document.querySelector('.boton-carrito');
+        const modal = document.getElementById('detalle-modal');
+        const modalImagen = document.getElementById('modal-imagen');
+        const modalNombre = document.getElementById('modal-nombre');
+        const modalPrecio = document.getElementById('modal-precio');
+        const modalDetalles = document.getElementById('modal-detalles');
+        const cantidadInput = document.getElementById('cantidad-input');
+        const botonAgregarModal = document.getElementById('boton-agregar-modal');
+
         let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        let productoSeleccionado = null; // Guardará los datos del producto abierto
 
         // Función para actualizar el contador del carrito en el header
         function actualizarContadorCarrito() {
@@ -206,65 +346,111 @@
             botonCarritoHeader.textContent = `CARRITO (${totalItems})`;
         }
 
+        // Función para formatear a moneda argentina
+        function formatearPrecio(precio) {
+            return precio.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0 });
+        }
+
         // Función principal para cargar y mostrar productos
         function cargarProductos() {
-            // Utilizamos la variable global 'productos' definida en productos.js
             if (typeof productos === 'undefined' || productos.length === 0) {
                 contenedorProductos.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; margin-top: 50px;">No hay productos disponibles en este momento.</p>';
                 return;
             }
 
-            contenedorProductos.innerHTML = ''; // Limpiar antes de rellenar
+            contenedorProductos.innerHTML = ''; 
 
             productos.forEach(producto => {
                 const card = document.createElement('div');
                 card.classList.add('producto-card');
+                
+                // Agregar el evento para abrir el modal al hacer clic en la tarjeta
+                card.onclick = () => abrirModal(producto.id);
 
-                // Formateamos el precio a moneda argentina sin decimales
-                const precioFormateado = producto.precio.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0 });
+                const precioFormateado = formatearPrecio(producto.precio);
 
-                // Estructura de la tarjeta de producto (minimalista)
+                // Estructura de la tarjeta de producto
                 card.innerHTML = `
                     <img src="${producto.imagen}" alt="${producto.nombre}">
                     <h3>${producto.nombre}</h3>
                     <p class="precio">${precioFormateado}</p>
-                    <button 
-                        class="boton-agregar"
-                        data-id="${producto.id}"
-                        data-nombre="${producto.nombre}"
-                        data-precio="${producto.precio}"
-                    >
-                        AGREGAR AL CARRITO
+                    <button class="boton-agregar-lista" data-id="${producto.id}" onclick="event.stopPropagation(); abrirModal(this.dataset.id);">
+                        VER DETALLES
                     </button>
                 `;
-
-                // Añadir evento al botón de agregar
-                const botonAgregar = card.querySelector('.boton-agregar');
-                botonAgregar.addEventListener('click', agregarAlCarrito);
 
                 contenedorProductos.appendChild(card);
             });
         }
 
-        // Función para agregar un producto al carrito
-        function agregarAlCarrito(e) {
+        // --- Lógica del Modal ---
+
+        function abrirModal(id) {
+            productoSeleccionado = productos.find(p => p.id === id);
+            
+            if (!productoSeleccionado) return;
+
+            // Rellenar el modal con la información del producto
+            modalImagen.src = productoSeleccionado.imagen;
+            modalNombre.textContent = productoSeleccionado.nombre;
+            modalPrecio.textContent = formatearPrecio(productoSeleccionado.precio);
+            modalDetalles.textContent = productoSeleccionado.detalles || 'Sin detalles adicionales.';
+            
+            // Restablecer la cantidad a 1
+            cantidadInput.value = 1;
+            
+            // Asignar datos al botón de agregar
+            botonAgregarModal.dataset.id = productoSeleccionado.id;
+            botonAgregarModal.dataset.nombre = productoSeleccionado.nombre;
+            botonAgregarModal.dataset.precio = productoSeleccionado.precio;
+            
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Evita el scroll en el body
+        }
+
+        function cerrarModal() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; 
+            productoSeleccionado = null;
+        }
+
+        // Cierra el modal si se hace clic fuera del contenido
+        function cerrarModalExterno(e) {
+            if (e.target === modal) {
+                cerrarModal();
+            }
+        }
+        
+        // Asignar el evento al botón de agregar dentro del modal
+        botonAgregarModal.addEventListener('click', agregarAlCarritoDesdeModal);
+
+
+        // Función para agregar un producto al carrito desde el modal
+        function agregarAlCarritoDesdeModal(e) {
             const id = e.target.dataset.id;
             const nombre = e.target.dataset.nombre;
             const precio = parseFloat(e.target.dataset.precio);
+            const cantidad = parseInt(cantidadInput.value);
+
+            if (isNaN(cantidad) || cantidad < 1) {
+                alert("Por favor, selecciona una cantidad válida.");
+                return;
+            }
 
             const itemExistente = carrito.find(item => item.id === id);
 
             if (itemExistente) {
-                itemExistente.cantidad++;
+                itemExistente.cantidad += cantidad;
             } else {
-                carrito.push({ id, nombre, precio, cantidad: 1 });
+                carrito.push({ id, nombre, precio, cantidad });
             }
 
             // Guardar en localStorage
             localStorage.setItem('carrito', JSON.stringify(carrito));
             actualizarContadorCarrito();
 
-            alert(`"${nombre}" añadido al carrito.`);
+            alert(`${cantidad} unidad(es) de "${nombre}" añadida(s) al carrito.`);
+            cerrarModal();
         }
 
         // Inicializar
