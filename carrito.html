@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Carrito | Vito Deportivo</title>
+    <style>
+        /* CSS BÁSICO para el carrito */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+        }
+        header a {
+            color: white;
+            text-decoration: none;
+            float: left;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .contenedor-carrito {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .item-carrito {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+        }
+        .item-carrito:last-child {
+            border-bottom: none;
+        }
+        .item-info {
+            flex-grow: 1;
+        }
+        .item-info h4 {
+            margin: 0;
+            color: #333;
+        }
+        .item-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .total-container {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid #ff6600;
+            text-align: right;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .checkout-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .boton-checkout, .boton-vaciar {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .boton-checkout {
+            background-color: #ff6600;
+            color: white;
+        }
+        .boton-checkout:hover {
+            background-color: #cc5200;
+        }
+        .boton-vaciar {
+            background-color: #ccc;
+            color: #333;
+            margin-left: 10px;
+        }
+        .boton-vaciar:hover {
+            background-color: #bbb;
+        }
+        /* Estilos para el input de cantidad */
+        .item-controls input[type="number"] {
+            width: 40px;
+            text-align: center;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="productos.html">← Seguir Comprando</a>
+        <h2>Tu Carrito de Compras</h2>
+        <span></span>
+    </header>
+
+    <div class="contenedor-carrito">
+        <div id="lista-carrito">
+            <p>Tu carrito está vacío.</p>
+        </div>
+        
+        <div class="total-container">
+            Total: <span id="total-carrito">$0</span>
+        </div>
+
+        <div class="checkout-container">
+            <button class="boton-checkout" id="finalizar-compra">CONFIRMAR PEDIDO Y PROCEDER AL PAGO MANUAL</button>
+            <button class="boton-vaciar" id="vaciar-carrito">Vaciar Carrito</button>
+        </div>
+    </div>
+
+    <script src="productos.js"></script>
+    <script>
+        // *** IMPORTANTE: CAMBIA ESTE NÚMERO POR EL NÚMERO DE WHATSAPP DEL VENDEDOR (CON CÓDIGO DE PAÍS Y ÁREA) ***
+        const whatsappNumber = "5491123456789"; // CAMBIA ESTO.
+        // *********************************************************************************************************
+
+        function getCarrito() {
+            return JSON.parse(localStorage.getItem('carritoVito')) || [];
+        }
+
+        function guardarCarrito(carrito) {
+            localStorage.setItem('carritoVito', JSON.stringify(carrito));
+            renderizarCarrito();
+        }
+
+        function actualizarCantidad(id, nuevaCantidad) {
+            let carrito = getCarrito();
+            let item = carrito.find(p => p.id === id);
+
+            if (item) {
+                item.cantidad = parseInt(nuevaCantidad);
+                if (item.cantidad <= 0) {
+                    // Si la cantidad es 0 o menos, lo eliminamos
+                    carrito = carrito.filter(p => p.id !== id);
+                }
+                guardarCarrito(carrito);
+            }
+        }
+        
+        function vaciarCarrito() {
+            if (confirm("¿Estás seguro de que quieres vaciar todo el carrito?")) {
+                localStorage.removeItem('carritoVito');
+                renderizarCarrito();
+            }
+        }
+
+        function calcularTotal() {
+            const carrito = getCarrito();
+            const total = carrito.reduce((sum, item) => sum + (Number(item.precio) * Number(item.cantidad)), 0);
+            return total;
+        }
+
+        function renderizarCarrito() {
+            const lista = document.getElementById('lista-carrito');
+            lista.innerHTML = '';
+            
+            const carrito = getCarrito();
+
+            if (carrito.length === 0) {
+                lista.innerHTML = '<p style="text-align: center;">Tu carrito está vacío. ¡Añade productos de nuestro <a href="productos.html">catálogo</a>!</p>';
+                document.getElementById('total-carrito').textContent = '$0';
+                document.getElementById('finalizar-compra').disabled = true;
+                return;
+            }
+            
+            document.getElementById('finalizar-compra').disabled = false;
+
+            carrito.forEach(item => {
+                const itemHTML = document.createElement('div');
+                itemHTML.classList.add('item-carrito');
+                
+                const subtotal = Number(item.precio) * Number(item.cantidad);
+                const precioUnidadFormato = Number(item.precio).toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0 });
+                const subtotalFormato = subtotal.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0 });
+
+                itemHTML.innerHTML = `
+                    <div class="item-info">
+                        <h4>${item.nombre}</h4>
+                        <p>${precioUnidadFormato} x unidad</p>
+                    </div>
+                    <div class="item-controls">
+                        <input type="number" min="1" value="${item.cantidad}" data-id="${item.id}">
+                        <p style="width: 120px; text-align: right;">${subtotalFormato}</p>
+                    </div>
+                `;
+                lista.appendChild(itemHTML);
+            });
+
+            // Adjuntar listeners de cambio a los inputs de cantidad
+            document.querySelectorAll('.item-controls input').forEach(input => {
+                input.addEventListener('change', (event) => {
+                    const id = event.target.getAttribute('data-id');
+                    const nuevaCantidad = event.target.value;
+                    actualizarCantidad(id, nuevaCantidad);
+                });
+            });
+            
+            // Actualizar el total
+            const total = calcularTotal();
+            document.getElementById('total-carrito').textContent = total.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0 });
+        }
+        
+        // --- Lógica del Checkout Final (WhatsApp Mejorado) ---
+        function finalizarCompra() {
+            const carrito = getCarrito();
+            const total = calcularTotal();
+
+            let mensaje = `¡Hola Vito Deportivo! Acabo de hacer un pedido a través de la web.%0A%0A*Detalle del Pedido:*%0A`;
+            
+            carrito.forEach(item => {
+                const subtotalItem = (Number(item.precio) * Number(item.cantidad)).toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0 });
+                mensaje += `- ${item.cantidad}x ${item.nombre} (${subtotalItem}).%0A`;
+            });
+
+            const totalFormato = total.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0 });
+            mensaje += `%0A*TOTAL A PAGAR: ${totalFormato}*%0A%0APor favor, confírmenme el stock final y los datos de pago (CBU / Alias). ¡Gracias!`;
+            
+            const url = `https://wa.me/${whatsappNumber}?text=${mensaje}`;
+            window.open(url, '_blank');
+        }
+
+        // --- Event Listeners Principales ---
+        document.addEventListener('DOMContentLoaded', renderizarCarrito);
+        document.getElementById('vaciar-carrito').addEventListener('click', vaciarCarrito);
+        document.getElementById('finalizar-compra').addEventListener('click', finalizarCompra);
+
+    </script>
+</body>
+</html>
