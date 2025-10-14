@@ -6,13 +6,14 @@
     <title>Carrito de Compras | Vito Deportivo</title>
     <style>
         /* ------------------------------------------- */
-        /* CSS BASADO EN COMOQUIERES / DISEÑO MINIMALISTA CLARO */
+        /* CSS BASADO EN ESTILO MODERNO CLARO Y LIMPIO */
         /* ------------------------------------------- */
         
         :root {
             --color-principal: #ff6600; /* Naranja Vito Deportivo (acentos) */
-            --color-fondo: #ffffff; /* Fondo Blanco */
+            --color-fondo: #f9f9f9; /* Fondo Gris Cemento muy CLARO */
             --color-texto-oscuro: #333333;
+            --color-header: #ffffff; /* Header/Card Blanco Puro */
             --color-borde: #eeeeee; /* Borde muy sutil */
         }
 
@@ -20,11 +21,7 @@
             font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            /* CAMBIOS DE FONDO */
-            background-image: url('https://static.vecteezy.com/system/resources/previews/002/677/456/non_2x/white-grey-cement-concrete-textured-background-soft-natural-wall-backdrop-for-aesthetic-creative-design-free-photo.jpg');
-            background-repeat: repeat; 
-            background-attachment: fixed;
-            background-color: var(--color-fondo); /* Fallback */
+            background-color: var(--color-fondo);
             color: var(--color-texto-oscuro);
             display: flex;
             flex-direction: column; 
@@ -38,14 +35,20 @@
             padding: 0 20px;
         }
 
-        /* 1. ESTILO DEL ENCABEZADO (Header) */
+        /* 1. ESTILO DEL ENCABEZADO (Header) - AHORA STICKY */
         header {
-            background-color: var(--color-fondo);
+            background-color: var(--color-header);
             padding: 15px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--color-borde);
+            
+            /* PROPIEDADES STICKY */
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
         header .logo {
             height: 60px; /* Logo más grande */
@@ -72,8 +75,9 @@
             border: 1px solid var(--color-texto-oscuro);
             color: var(--color-texto-oscuro);
             padding: 8px 15px;
-            border-radius: 3px;
+            border-radius: 0;
             font-size: 0.9em;
+            font-weight: 500;
             transition: background-color 0.3s, color 0.3s;
         }
         .boton-catalogo:hover {
@@ -87,16 +91,18 @@
             font-weight: 300;
             margin-bottom: 30px;
             text-align: center;
-            background-color: rgba(255, 255, 255, 0.9); /* Fondo para el título */
+            background-color: var(--color-header);
             padding: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }
 
         .carrito-tabla {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 30px;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: var(--color-header);
             padding: 0 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }
         .carrito-tabla th, .carrito-tabla td {
             text-align: left;
@@ -126,7 +132,7 @@
             padding: 5px;
             text-align: center;
             border: 1px solid var(--color-borde);
-            border-radius: 3px;
+            border-radius: 0;
             font-size: 1em;
         }
 
@@ -150,8 +156,9 @@
             border-top: 1px solid var(--color-borde);
             padding-top: 20px;
             margin-top: 20px;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: var(--color-header);
             padding: 20px 10px 20px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }
         .total-texto {
             font-size: 1.4em;
@@ -164,21 +171,21 @@
             font-weight: bold;
         }
         .boton-checkout {
-            background-color: var(--color-principal);
+            background-color: var(--color-texto-oscuro); /* Botón checkout NEGRO */
             color: white;
             padding: 12px 30px;
             text-decoration: none;
             border: none;
-            border-radius: 3px;
+            border-radius: 0;
             font-size: 1.1em;
-            font-weight: bold;
+            font-weight: 500;
             transition: background-color 0.3s;
             cursor: pointer;
             margin-left: 30px;
             text-transform: uppercase;
         }
         .boton-checkout:hover {
-            background-color: #e65c00;
+            background-color: var(--color-principal);
         }
 
         /* Mensaje de Carrito Vacío */
@@ -187,15 +194,16 @@
             padding: 50px;
             font-size: 1.2em;
             color: #666;
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: var(--color-header);
             border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }
 
         /* ESTILO DEL FOOTER */
         footer {
             width: 100%;
             padding: 20px 0;
-            background-color: var(--color-fondo);
+            background-color: var(--color-header);
             color: #999999;
             font-size: 0.8em;
             border-top: 1px solid var(--color-borde);
@@ -271,12 +279,10 @@
 
         let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
-        // Función para formatear a moneda argentina
         function formatearPrecio(precio) {
             return precio.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0 });
         }
 
-        // 1. Renderiza los items del carrito
         function renderizarCarrito() {
             carrito = carrito.filter(item => item.cantidad > 0);
             carritoTablaBody.innerHTML = '';
@@ -315,7 +321,6 @@
             carritoTotalElement.textContent = formatearPrecio(total);
         }
 
-        // 2. Actualiza la cantidad de un item
         function actualizarCantidad(e) {
             const id = e.target.dataset.id;
             const nuevaCantidad = parseInt(e.target.value);
@@ -333,7 +338,6 @@
             }
         }
 
-        // 3. Elimina un item del carrito
         function eliminarItem(e) {
             const id = e.target.dataset.id;
             carrito = carrito.filter(item => item.id !== id);
@@ -341,12 +345,10 @@
             renderizarCarrito();
         }
 
-        // 4. Guarda el carrito en localStorage
         function guardarCarrito() {
             localStorage.setItem('carrito', JSON.stringify(carrito));
         }
 
-        // 5. Finalizar Compra (Simulación)
         function finalizarCompra() {
             if (carrito.length === 0) {
                 alert("El carrito está vacío.");
@@ -359,14 +361,11 @@
             
             alert(mensaje);
 
-            // Vaciar carrito después de la compra (simulado)
             carrito = [];
             guardarCarrito();
             renderizarCarrito();
         }
 
-
-        // Inicializar la página
         document.addEventListener('DOMContentLoaded', renderizarCarrito);
     </script>
 </body>
