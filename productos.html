@@ -5,183 +5,273 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo | Vito Deportivo</title>
     <style>
-        /* CSS BÁSICO */
+        /* ------------------------------------------- */
+        /* CSS BASADO EN COMOQUIERES / DISEÑO MINIMALISTA CLARO */
+        /* ------------------------------------------- */
+        
+        :root {
+            --color-principal: #ff6600; /* Naranja Vito Deportivo (acentos) */
+            --color-fondo: #ffffff; /* Fondo Blanco */
+            --color-texto-oscuro: #333333;
+            --color-borde: #eeeeee; /* Borde muy sutil */
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: var(--color-fondo);
+            color: var(--color-texto-oscuro);
+            display: flex;
+            flex-direction: column; 
+            min-height: 100vh;
         }
+        
+        .main-content {
+            flex-grow: 1; /* Ocupa el espacio restante */
+        }
+
+        /* 1. ESTILO DEL ENCABEZADO (Header) */
         header {
-            background-color: #333;
-            color: white;
-            padding: 15px 20px;
-            text-align: center;
+            background-color: var(--color-fondo);
+            padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid var(--color-borde);
+        }
+        header h1 {
+            font-size: 1.5em;
+            letter-spacing: 0.5px;
+            margin: 0;
+            color: var(--color-texto-oscuro);
+            font-weight: 500;
         }
         header a {
-            color: white;
+            color: var(--color-texto-oscuro);
             text-decoration: none;
-            font-weight: bold;
+            font-weight: 500;
             padding: 5px 10px;
-            margin-left: 10px;
+            transition: color 0.3s;
+            font-size: 0.95em;
+        }
+        header a:hover {
+            color: var(--color-principal);
         }
         .boton-carrito {
-            background-color: #ff6600;
+            background-color: transparent;
+            border: 1px solid var(--color-principal);
+            color: var(--color-principal);
             padding: 8px 15px;
-            border-radius: 5px;
-            margin-right: 10px;
+            border-radius: 3px;
+            font-size: 0.9em;
+            transition: background-color 0.3s, color 0.3s;
         }
+        .boton-carrito:hover {
+            background-color: var(--color-principal);
+            color: white;
+        }
+
+        /* 2. DISEÑO DEL CONTENEDOR DE PRODUCTOS (Grid) */
         .contenedor-productos {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 20px;
-            gap: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            padding: 60px 40px;
+            max-width: 1200px;
+            margin: auto;
         }
+
+        /* 3. DISEÑO DE LA TARJETA DE PRODUCTO (Card) */
         .producto-card {
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 15px;
-            width: 300px;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
-            text-align: center;
+            background-color: var(--color-fondo);
+            border: none;
+            border-radius: 0;
+            padding: 0;
+            box-shadow: none;
+            text-align: left; /* Alineado a la izquierda */
+            transition: opacity 0.3s;
+        }
+        .producto-card:hover {
+            opacity: 0.9;
+            transform: none;
+            box-shadow: none;
         }
         .producto-card img {
             width: 100%;
-            height: 250px;
+            height: 350px; /* Fotos grandes */
             object-fit: cover;
-            border-radius: 4px;
+            border-radius: 0;
             margin-bottom: 10px;
         }
         .producto-card h3 {
-            color: #ff6600;
-            margin: 10px 0;
+            color: var(--color-texto-oscuro);
+            font-size: 1.1em;
+            margin: 0;
+            font-weight: 500;
+            text-transform: uppercase;
         }
-        .producto-card p {
-            font-size: 1.2em;
-            color: #333;
-            font-weight: bold;
+        .producto-card .precio {
+            font-size: 1.1em;
+            color: #666666; /* Precio más sutil */
+            font-weight: 300;
+            margin: 5px 0 10px 0;
         }
+        .producto-card .detalles {
+            display: none; /* Ocultamos los detalles para un look más limpio */
+        }
+        
+        /* 4. ESTILO DEL BOTÓN DE AGREGAR */
         .boton-agregar {
-            background-color: #25D366; /* Verde */
+            background-color: #000000;
             color: white;
-            padding: 10px 20px;
+            padding: 10px 0;
             text-decoration: none;
-            border: none;
-            border-radius: 5px;
-            margin-top: 10px;
-            font-weight: bold;
+            border: 1px solid #000000;
+            border-radius: 0;
+            font-weight: 500;
             cursor: pointer;
-            transition: background-color 0.3s;
+            width: 100%;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            transition: background-color 0.3s, color 0.3s;
         }
         .boton-agregar:hover {
-            background-color: #128C7E;
+            background-color: var(--color-principal);
+            border-color: var(--color-principal);
+        }
+        
+        /* ESTILO DEL FOOTER */
+        footer {
+            width: 100%;
+            padding: 20px 0;
+            background-color: var(--color-fondo);
+            color: #999999;
+            font-size: 0.8em;
+            border-top: 1px solid var(--color-borde);
+            text-align: center;
+        }
+        footer a {
+            color: var(--color-principal);
+            text-decoration: none;
+        }
+
+
+        /* RESPONSIVE BÁSICO */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 10px;
+            }
+            header h1 {
+                font-size: 1.2em;
+            }
+            .contenedor-productos {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            .boton-carrito {
+                padding: 5px 10px;
+            }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <a href="index.html">← Inicio</a>
-        <h1>Catálogo Oficial Vito Deportivo</h1>
-        <a href="carrito.html" class="boton-carrito">🛒 Ver Carrito (<span id="contador-carrito">0</span>)</a>
+        <a href="index.html">← INICIO</a>
+        <h1>VITO DEPORTIVO</h1>
+        <a href="carrito.html" class="boton-carrito">CARRITO (0)</a>
     </header>
 
-    <div class="contenedor-productos" id="contenedor-productos">
-        </div>
+    <div class="main-content">
+        <div class="contenedor-productos">
+            </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Vito Deportivo. | Diseño por <a href="https://technenest.com" target="_blank">Techne Nest</a>.
+    </footer>
 
     <script src="productos.js"></script>
     <script>
-        // LÓGICA MÍNIMA DEL CATÁLOGO 
-        
-        const contenedor = document.getElementById('contenedor-productos');
-        const contadorCarrito = document.getElementById('contador-carrito');
+        // --- CÓDIGO JavaScript para Cargar Productos y Carrito ---
 
-        // Función para cargar los productos desde productos.js
+        const contenedorProductos = document.querySelector('.contenedor-productos');
+        const botonCarritoHeader = document.querySelector('.boton-carrito');
+        let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+        // Función para actualizar el contador del carrito en el header
+        function actualizarContadorCarrito() {
+            const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+            botonCarritoHeader.textContent = `CARRITO (${totalItems})`;
+        }
+
+        // Función principal para cargar y mostrar productos
         function cargarProductos() {
-            // Limpiar productos anteriores
-            contenedor.innerHTML = ''; 
-            
+            // Utilizamos la variable global 'productos' definida en productos.js
+            if (typeof productos === 'undefined' || productos.length === 0) {
+                contenedorProductos.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; margin-top: 50px;">No hay productos disponibles en este momento.</p>';
+                return;
+            }
+
+            contenedorProductos.innerHTML = ''; // Limpiar antes de rellenar
+
             productos.forEach(producto => {
                 const card = document.createElement('div');
                 card.classList.add('producto-card');
-                
-                // Formatear el precio a moneda
+
+                // Formateamos el precio a moneda argentina sin decimales
                 const precioFormateado = producto.precio.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0 });
 
+                // Estructura de la tarjeta de producto (minimalista)
                 card.innerHTML = `
                     <img src="${producto.imagen}" alt="${producto.nombre}">
                     <h3>${producto.nombre}</h3>
-                    <p>${precioFormateado}</p>
-                    <p style="font-size:0.9em; font-weight: normal; color: #666;">${producto.detalles || ''}</p>
+                    <p class="precio">${precioFormateado}</p>
                     <button 
                         class="boton-agregar"
                         data-id="${producto.id}"
                         data-nombre="${producto.nombre}"
                         data-precio="${producto.precio}"
                     >
-                        AÑADIR AL CARRITO
+                        AGREGAR AL CARRITO
                     </button>
                 `;
-                contenedor.appendChild(card);
+
+                // Añadir evento al botón de agregar
+                const botonAgregar = card.querySelector('.boton-agregar');
+                botonAgregar.addEventListener('click', agregarAlCarrito);
+
+                contenedorProductos.appendChild(card);
             });
-            
-            // Adjuntar evento de clic a los nuevos botones
-            document.querySelectorAll('.boton-agregar').forEach(button => {
-                button.addEventListener('click', agregarProductoAlCarrito);
-            });
-            
-            // Actualizar el contador inicial
-            actualizarContadorCarrito();
         }
 
-        // --- Lógica del Carrito (Compartida con carrito.html) ---
-        
-        function getCarrito() {
-            // Lee el carrito de la memoria local. Si no existe, devuelve un array vacío.
-            return JSON.parse(localStorage.getItem('carritoVito')) || [];
-        }
+        // Función para agregar un producto al carrito
+        function agregarAlCarrito(e) {
+            const id = e.target.dataset.id;
+            const nombre = e.target.dataset.nombre;
+            const precio = parseFloat(e.target.dataset.precio);
 
-        function guardarCarrito(carrito) {
-            localStorage.setItem('carritoVito', JSON.stringify(carrito));
-            actualizarContadorCarrito();
-        }
-        
-        function actualizarContadorCarrito() {
-            const carrito = getCarrito();
-            const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
-            contadorCarrito.textContent = totalItems;
-        }
-
-        function agregarProductoAlCarrito(event) {
-            const button = event.target;
-            const id = button.getAttribute('data-id');
-            const nombre = button.getAttribute('data-nombre');
-            // Usar parseFloat para asegurarse de que es un número
-            const precio = parseFloat(button.getAttribute('data-precio')); 
-            
-            let carrito = getCarrito();
             const itemExistente = carrito.find(item => item.id === id);
 
             if (itemExistente) {
-                // Si existe, solo aumenta la cantidad
-                itemExistente.cantidad += 1;
+                itemExistente.cantidad++;
             } else {
-                // Si es nuevo, añade el producto con cantidad 1
                 carrito.push({ id, nombre, precio, cantidad: 1 });
             }
-            
-            guardarCarrito(carrito);
+
+            // Guardar en localStorage
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            actualizarContadorCarrito();
+
             alert(`"${nombre}" añadido al carrito.`);
         }
 
-        // Ejecutar la función principal al cargar la página
-        cargarProductos();
-        
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            cargarProductos();
+            actualizarContadorCarrito();
+        });
     </script>
 </body>
 </html>
