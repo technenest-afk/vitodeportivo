@@ -3,372 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrito de Compras | Vito Deportivo</title>
+    <title>Vito Deportivo - Carrito</title>
     <style>
-        /* ------------------------------------------- */
-        /* CSS BASADO EN ESTILO MODERNO CLARO Y LIMPIO con Header Negro */
-        /* ------------------------------------------- */
-        
-        :root {
-            --color-principal: #ff6600; /* Naranja Vito Deportivo (acentos) */
-            --color-fondo: #f9f9f9; /* Fondo Gris Cemento muy CLARO */
-            --color-texto-oscuro: #333333;
-            --color-header-fondo: #000000; /* Fondo del Header NEGRO */
-            --color-header-texto: #ffffff; /* Texto del Header BLANCO */
-            --color-borde: #eeeeee; /* Borde muy sutil */
-        }
-
+        /* Estilos CSS BÁSICOS de la tienda (similares a productos.html) */
         body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--color-fondo);
-            color: var(--color-texto-oscuro);
-            display: flex;
-            flex-direction: column; 
-            min-height: 100vh;
+            background-color: #f0f2f5;
         }
-        
-        .main-content {
-            flex-grow: 1;
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        /* 1. ESTILO DEL ENCABEZADO (Header) - AHORA STICKY Y NEGRO */
         header {
-            background-color: var(--color-header-fondo); /* Fondo NEGRO */
-            padding: 15px 40px;
+            background-color: #ff4500;
+            color: white;
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        header .logo {
-            height: 60px; /* Logo más grande */
-            width: auto;
-            /* Se remueve filter: invert(1) */
+        header h1 {
+            margin: 0;
+            font-size: 1.8em;
         }
-        header .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 20px; 
-        }
-        header a {
-            color: var(--color-header-texto); /* Texto del header BLANCO */
-            text-decoration: none;
-            font-weight: 500;
-            padding: 5px 10px;
-            transition: color 0.3s;
-            font-size: 0.95em;
-        }
-        header a:hover {
-            color: var(--color-principal);
-        }
-        .boton-catalogo {
-            background-color: transparent;
-            border: 1px solid var(--color-principal); /* Borde naranja */
-            color: var(--color-principal); /* Texto naranja */
-            padding: 8px 15px;
-            border-radius: 0;
-            font-size: 0.9em;
-            font-weight: 500;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .boton-catalogo:hover {
-            background-color: var(--color-principal);
-            border-color: var(--color-principal);
+        nav a {
             color: white;
-        }
-
-        /* 2. ESTILO DEL CONTENIDO DEL CARRITO */
-        .titulo-pagina {
-            font-size: 2.2em;
-            font-weight: 300;
-            margin-bottom: 30px;
-            text-align: center;
-            background-color: white;
-            padding: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-        }
-
-        .carrito-tabla {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 30px;
-            background-color: white;
-            padding: 0 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-        }
-        .carrito-tabla th, .carrito-tabla td {
-            text-align: left;
-            padding: 15px 0;
-            border-bottom: 1px solid var(--color-borde);
-            font-size: 1em;
-        }
-        .carrito-tabla th {
-            font-weight: 500;
-            color: #666;
-            text-transform: uppercase;
-            font-size: 0.9em;
-        }
-        .carrito-tabla tr:last-child td {
-            border-bottom: none;
-        }
-        
-        .item-nombre {
-            font-weight: 500;
-        }
-        .item-precio {
-            color: #666;
-        }
-        
-        .item-cantidad input {
-            width: 50px;
-            padding: 5px;
-            text-align: center;
-            border: 1px solid var(--color-borde);
-            border-radius: 0;
-            font-size: 1em;
-        }
-
-        .boton-eliminar {
-            background: none;
-            border: none;
-            color: #999;
-            cursor: pointer;
-            font-size: 1.2em;
-            transition: color 0.3s;
-        }
-        .boton-eliminar:hover {
-            color: var(--color-principal);
-        }
-
-        /* 3. RESUMEN Y BOTÓN DE COMPRA */
-        .resumen-carrito {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            border-top: 1px solid var(--color-borde);
-            padding-top: 20px;
-            margin-top: 20px;
-            background-color: white;
-            padding: 20px 10px 20px 0;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-        }
-        .total-texto {
-            font-size: 1.4em;
-            font-weight: 500;
-            margin-right: 20px;
-        }
-        .total-monto {
-            font-size: 1.6em;
-            color: var(--color-principal);
+            text-decoration: none;
+            margin-left: 20px;
             font-weight: bold;
         }
-        .boton-checkout {
-            background-color: var(--color-texto-oscuro); 
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .main-content {
+            padding: 20px;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #ff4500;
+            padding-bottom: 10px;
+        }
+        #lista-carrito {
+            list-style: none;
+            padding: 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        #lista-carrito li {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #lista-carrito li:last-child {
+            border-bottom: none;
+        }
+        #lista-carrito button {
+            background-color: #f44336;
             color: white;
-            padding: 12px 30px;
-            text-decoration: none;
             border: none;
-            border-radius: 0;
-            font-size: 1.1em;
-            font-weight: 500;
-            transition: background-color 0.3s;
+            padding: 5px 10px;
+            border-radius: 3px;
             cursor: pointer;
-            margin-left: 30px;
-            text-transform: uppercase;
-        }
-        .boton-checkout:hover {
-            background-color: var(--color-principal);
-        }
-
-        /* Mensaje de Carrito Vacío */
-        #carrito-vacio-mensaje {
-            text-align: center;
-            padding: 50px;
-            font-size: 1.2em;
-            color: #666;
-            background-color: white;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-        }
-
-        /* ESTILO DEL FOOTER */
-        footer {
-            width: 100%;
-            padding: 20px 0;
-            background-color: white;
-            color: #999999;
             font-size: 0.8em;
-            border-top: 1px solid var(--color-borde);
-            text-align: center;
-            margin-top: auto; 
         }
-        footer a {
-            color: var(--color-principal);
-            text-decoration: none;
+        #total-compra {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #333;
+            margin-top: 20px;
+            text-align: right;
         }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            header { padding: 15px 10px; }
-            header .logo { height: 40px; }
-            header .nav-links { gap: 10px; }
-            .main-content { margin: 20px auto; }
-            .resumen-carrito { flex-direction: column; align-items: flex-end; }
-            .total-texto, .total-monto { margin-bottom: 15px; margin-right: 0; }
-            .boton-checkout { margin-left: 0; width: 100%; }
+        #boton-finalizar-compra {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.2s;
         }
-
+        #boton-finalizar-compra:hover:not(:disabled) {
+            background-color: #45a049;
+        }
+        #boton-finalizar-compra:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <img src="img/517401391_17909253798177464_8167142829808248451_n.jpg" alt="Vito Deportivo Logo" class="logo">
-        <div class="nav-links">
-            <a href="index.html">INICIO</a>
-            <a href="productos.html" class="boton-catalogo">CATÁLOGO</a>
-        </div>
+        <h1>Vito Deportivo</h1>
+        <nav>
+            <a href="productos.html">Volver al Catálogo</a>
+        </nav>
     </header>
 
     <div class="main-content">
-        <h2 class="titulo-pagina">TU CARRITO DE COMPRAS</h2>
-        
-        <div id="carrito-vacio-mensaje" style="display:none;">
-            Tu carrito está vacío. <br><br> <a href="productos.html" style="color: var(--color-principal); text-decoration: none; font-weight: bold;">Explora nuestros productos</a> para empezar a comprar.
-        </div>
+        <h2>Tu Carrito de Compras</h2>
 
-        <table class="carrito-tabla" id="carrito-items" style="display:none;">
-            <thead>
-                <tr>
-                    <th>Producto</th>
-                    <th>Precio</th>
-                    <th style="width: 120px;">Cantidad</th>
-                    <th>Subtotal</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                </tbody>
-        </table>
+        <ul id="lista-carrito">
+            <li>Cargando carrito...</li>
+        </ul>
 
-        <div class="resumen-carrito" id="resumen-carrito" style="display:none;">
-            <span class="total-texto">TOTAL:</span>
-            <span class="total-monto" id="carrito-total">$0</span>
-            <button class="boton-checkout" onclick="finalizarCompra()">FINALIZAR COMPRA</button>
-        </div>
+        <div id="total-compra">Total a Pagar: $0</div>
+
+        <button id="boton-finalizar-compra" disabled>Finalizar Compra</button>
     </div>
 
-    <footer>
-        &copy; 2025 Vito Deportivo. | Diseño por <a href="https://technenest.com" target="_blank">Techne Nest</a>.
-    </footer>
-
     <script>
-        const carritoTablaBody = document.querySelector('#carrito-items tbody');
-        const carritoTotalElement = document.getElementById('carrito-total');
-        const carritoItemsTable = document.getElementById('carrito-items');
-        const resumenCarritoDiv = document.getElementById('resumen-carrito');
-        const carritoVacioMensaje = document.getElementById('carrito-vacio-mensaje');
+        // *****************************************************************
+        // >>>>>>>>>>>> CONFIGURACIÓN DE MONGODB ATLAS (MISMAS CLAVES) <<<<<<<<<<<
+        // CLAVES DE DATA API FINALES
+        const MONGODB_API_KEY = '1d6aca63-0b04-441e-a383-329ad4eb5540'; 
+        const MONGODB_BASE_URL = 'https://data.mongodb-api.com/app/68eeb40abfc39a6aeb5ee03a/endpoint/data/v1'; 
+
+        const MONGODB_INSERT_URL = `${MONGODB_BASE_URL}/action/insertOne`; 
+        // *****************************************************************
 
         let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        const listaCarrito = document.getElementById('lista-carrito');
+        const totalElement = document.getElementById('total-compra');
 
         function formatearPrecio(precio) {
-            return precio.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0 });
+            const numPrecio = Number(precio); 
+            if (isNaN(numPrecio)) return '$0';
+            return numPrecio.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0 });
         }
 
-        function renderizarCarrito() {
-            carrito = carrito.filter(item => item.cantidad > 0);
-            carritoTablaBody.innerHTML = '';
-            let total = 0;
+        function calcularTotal(items) {
+            return items.reduce((total, item) => total + (item.precio * item.cantidad), 0);
+        }
 
-            if (carrito.length === 0) {
-                carritoItemsTable.style.display = 'none';
-                resumenCarritoDiv.style.display = 'none';
-                carritoVacioMensaje.style.display = 'block';
-                return;
-            }
-
-            carritoItemsTable.style.display = 'table';
-            resumenCarritoDiv.style.display = 'flex';
-            carritoVacioMensaje.style.display = 'none';
-
-            carrito.forEach(item => {
-                const subtotal = item.precio * item.cantidad;
-                total += subtotal;
-
-                const fila = document.createElement('tr');
-                fila.innerHTML = `
-                    <td class="item-nombre">${item.nombre}</td>
-                    <td class="item-precio">${formatearPrecio(item.precio)}</td>
-                    <td class="item-cantidad">
-                        <input type="number" min="1" value="${item.cantidad}" data-id="${item.id}" onchange="actualizarCantidad(event)">
-                    </td>
-                    <td>${formatearPrecio(subtotal)}</td>
-                    <td>
-                        <button class="boton-eliminar" data-id="${item.id}" onclick="eliminarItem(event)">×</button>
-                    </td>
+        function actualizarCarrito() {
+            listaCarrito.innerHTML = '';
+            carrito.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    ${item.nombre} x ${item.cantidad} (${formatearPrecio(item.precio)} c/u) - 
+                    Total: ${formatearPrecio(item.precio * item.cantidad)}
+                    <button onclick="eliminarDelCarrito(${index})">X</button>
                 `;
-                carritoTablaBody.appendChild(fila);
+                listaCarrito.appendChild(li);
             });
 
-            carritoTotalElement.textContent = formatearPrecio(total);
-        }
-
-        function actualizarCantidad(e) {
-            const id = e.target.dataset.id;
-            const nuevaCantidad = parseInt(e.target.value);
-
-            if (isNaN(nuevaCantidad) || nuevaCantidad < 1) {
-                e.target.value = 1;
-                return;
-            }
-
-            const item = carrito.find(i => i.id === id);
-            if (item) {
-                item.cantidad = nuevaCantidad;
-                guardarCarrito();
-                renderizarCarrito();
+            const total = calcularTotal(carrito);
+            totalElement.textContent = `Total a Pagar: ${formatearPrecio(total)}`;
+            if (carrito.length === 0) {
+                listaCarrito.innerHTML = '<li>El carrito está vacío.</li>';
+                document.getElementById('boton-finalizar-compra').disabled = true;
+            } else {
+                document.getElementById('boton-finalizar-compra').disabled = false;
             }
         }
 
-        function eliminarItem(e) {
-            const id = e.target.dataset.id;
-            carrito = carrito.filter(item => item.id !== id);
-            guardarCarrito();
-            renderizarCarrito();
-        }
-
-        function guardarCarrito() {
+        function eliminarDelCarrito(index) {
+            carrito.splice(index, 1);
             localStorage.setItem('carrito', JSON.stringify(carrito));
+            actualizarCarrito();
         }
 
-        function finalizarCompra() {
+        async function enviarPedidoAMongoDB(nombreCliente, contactoCliente) {
             if (carrito.length === 0) {
                 alert("El carrito está vacío.");
                 return;
             }
 
-            const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
-            
-            const mensaje = `¡Gracias por tu compra en Vito Deportivo!\n\nTotal a pagar: ${formatearPrecio(total)}.\n\nEn breve nos pondremos en contacto para coordinar el pago y el envío.`;
-            
-            alert(mensaje);
+            const total = calcularTotal(carrito);
+            const detallePedido = carrito.map(item => 
+                `${item.cantidad} x ${item.nombre} (P.U: ${item.precio})`
+            ).join(' | '); 
 
-            carrito = [];
-            guardarCarrito();
-            renderizarCarrito();
+            const pedidoDocument = {
+                total: total.toFixed(2),
+                detallePedido: detallePedido,
+                nombreCliente: nombreCliente,
+                contactoCliente: contactoCliente,
+                estado: "PENDIENTE", 
+                fecha: new Date().toISOString() 
+            };
+
+            const MONGODB_PAYLOAD = JSON.stringify({
+                "collection": "pedidos", 
+                "database": "vitodeportivo", 
+                "dataSource": "Cluster0", 
+                "document": pedidoDocument 
+            });
+
+            try {
+                const response = await fetch(MONGODB_INSERT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'api-key': MONGODB_API_KEY },
+                    body: MONGODB_PAYLOAD
+                });
+
+                if (!response.ok) {
+                    throw new Error('Error al guardar el pedido. Verifique las reglas de la Data API para "pedidos".');
+                }
+                
+                localStorage.removeItem('carrito');
+                alert(`¡Pedido de ${formatearPrecio(total)} registrado con éxito!`); 
+                window.location.href = 'productos.html'; 
+                
+            } catch (error) {
+                console.error("Error al enviar el pedido:", error);
+                alert("Error al procesar el pedido. Revise la consola para más detalles.");
+            }
         }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            actualizarCarrito();
+        });
 
-        document.addEventListener('DOMContentLoaded', renderizarCarrito);
+        document.getElementById('boton-finalizar-compra').addEventListener('click', () => {
+            const nombre = prompt("Ingrese su nombre completo:");
+            if (!nombre) return;
+            const contacto = prompt("Ingrese su número de WhatsApp o Email:");
+            if (!contacto) return;
+
+            enviarPedidoAMongoDB(nombre, contacto);
+        });
     </script>
 </body>
 </html>
