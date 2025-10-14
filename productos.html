@@ -6,14 +6,15 @@
     <title>Catálogo | Vito Deportivo</title>
     <style>
         /* ------------------------------------------- */
-        /* CSS BASADO EN ESTILO MODERNO CLARO Y LIMPIO */
+        /* CSS BASADO EN ESTILO MODERNO CLARO Y LIMPIO con Header Negro */
         /* ------------------------------------------- */
         
         :root {
             --color-principal: #ff6600; /* Naranja Vito Deportivo (acentos) */
             --color-fondo: #f9f9f9; /* Fondo Gris Cemento muy CLARO */
             --color-texto-oscuro: #333333;
-            --color-header: #ffffff; /* Header/Card Blanco Puro */
+            --color-header-fondo: #000000; /* Fondo del Header NEGRO */
+            --color-header-texto: #ffffff; /* Texto del Header BLANCO */
             --color-borde: #eeeeee; /* Borde muy sutil */
         }
 
@@ -32,25 +33,25 @@
             flex-grow: 1;
         }
 
-        /* 1. ESTILO DEL ENCABEZADO (Header) - AHORA STICKY */
+        /* 1. ESTILO DEL ENCABEZADO (Header) - AHORA STICKY Y NEGRO */
         header {
-            background-color: var(--color-header);
+            background-color: var(--color-header-fondo); /* Fondo NEGRO */
             padding: 15px 40px; 
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--color-borde);
+            border-bottom: 1px solid rgba(255,255,255,0.1); 
             
-            /* PROPIEDADES STICKY */
             position: sticky;
             top: 0;
             z-index: 50;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
         header .logo {
             height: 60px; 
             width: auto;
             margin-right: auto; 
+            filter: invert(1); /* Invierte el color del logo si es claro */
         }
         header .nav-links {
             display: flex;
@@ -58,7 +59,7 @@
             gap: 20px; 
         }
         header a {
-            color: var(--color-texto-oscuro);
+            color: var(--color-header-texto); /* Texto del header BLANCO */
             text-decoration: none;
             font-weight: 500;
             padding: 5px 10px;
@@ -70,8 +71,8 @@
         }
         .boton-carrito {
             background-color: transparent;
-            border: 1px solid var(--color-texto-oscuro); /* Borde negro/oscuro */
-            color: var(--color-texto-oscuro);
+            border: 1px solid var(--color-principal); /* Borde naranja */
+            color: var(--color-principal); /* Texto naranja */
             padding: 8px 15px;
             border-radius: 0;
             font-size: 0.9em;
@@ -96,11 +97,11 @@
 
         /* 3. DISEÑO DE LA TARJETA DE PRODUCTO (Card) */
         .producto-card {
-            background-color: var(--color-header); /* Fondo de tarjeta blanco */
+            background-color: white; 
             border: 1px solid var(--color-borde);
             border-radius: 0;
             padding: 0;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05); /* Sombra sutil */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05); 
             text-align: left; 
             transition: box-shadow 0.3s;
             cursor: pointer; 
@@ -131,7 +132,7 @@
         
         /* 4. ESTILO DEL BOTÓN DE AGREGAR EN LISTA */
         .boton-agregar-lista {
-            background-color: var(--color-texto-oscuro); /* Botón NEGRO/Oscuro (como Discobolo) */
+            background-color: var(--color-texto-oscuro); 
             color: white;
             padding: 10px 0;
             text-decoration: none;
@@ -153,7 +154,7 @@
         footer {
             width: 100%;
             padding: 20px 0;
-            background-color: var(--color-header);
+            background-color: white;
             color: #999999;
             font-size: 0.8em;
             border-top: 1px solid var(--color-borde);
@@ -182,7 +183,7 @@
         }
 
         .modal-contenido {
-            background-color: var(--color-header); 
+            background-color: white; 
             margin: 5% auto;
             padding: 30px;
             border: 1px solid #888;
