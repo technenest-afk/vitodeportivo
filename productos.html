@@ -20,7 +20,11 @@
             font-family: 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--color-fondo);
+            /* CAMBIOS DE FONDO */
+            background-image: url('https://static.vecteezy.com/system/resources/previews/002/677/456/non_2x/white-grey-cement-concrete-textured-background-soft-natural-wall-backdrop-for-aesthetic-creative-design-free-photo.jpg');
+            background-repeat: repeat; 
+            background-attachment: fixed;
+            background-color: var(--color-fondo); /* Fallback */
             color: var(--color-texto-oscuro);
             display: flex;
             flex-direction: column; 
@@ -34,21 +38,21 @@
         /* 1. ESTILO DEL ENCABEZADO (Header) */
         header {
             background-color: var(--color-fondo);
-            padding: 15px 40px; /* Ajustado el padding para el logo */
+            padding: 15px 40px; 
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--color-borde);
         }
         header .logo {
-            height: 40px; /* Tamaño más pequeño para el logo en el header */
+            height: 60px; /* Logo más grande */
             width: auto;
-            margin-right: auto; /* Para empujar el logo a la izquierda */
+            margin-right: auto; 
         }
         header .nav-links {
             display: flex;
             align-items: center;
-            gap: 20px; /* Espacio entre los enlaces */
+            gap: 20px; 
         }
         header a {
             color: var(--color-texto-oscuro);
@@ -83,6 +87,8 @@
             padding: 60px 40px;
             max-width: 1200px;
             margin: auto;
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo ligeramente transparente para el contenido */
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
         }
 
         /* 3. DISEÑO DE LA TARJETA DE PRODUCTO (Card) */
@@ -344,32 +350,39 @@
         const botonAgregarModal = document.getElementById('boton-agregar-modal');
 
         let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-        let productoSeleccionado = null; 
+        let productoSeleccionado = null; // Guardará los datos del producto abierto
 
+        // Función para actualizar el contador del carrito en el header
         function actualizarContadorCarrito() {
             const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
             botonCarritoHeader.textContent = `CARRITO (${totalItems})`;
         }
 
+        // Función para formatear a moneda argentina
         function formatearPrecio(precio) {
             return precio.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0 });
         }
 
+        // Función principal para cargar y mostrar productos
         function cargarProductos() {
+            // Utilizamos la variable global 'productos' definida en productos.js
             if (typeof productos === 'undefined' || productos.length === 0) {
                 contenedorProductos.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; margin-top: 50px;">No hay productos disponibles en este momento.</p>';
                 return;
             }
 
-            contenedorProductos.innerHTML = ''; 
+            contenedorProductos.innerHTML = ''; // Limpiar antes de rellenar
 
             productos.forEach(producto => {
                 const card = document.createElement('div');
                 card.classList.add('producto-card');
+                
+                // Agregar el evento para abrir el modal al hacer clic en la tarjeta
                 card.onclick = () => abrirModal(producto.id);
 
                 const precioFormateado = formatearPrecio(producto.precio);
 
+                // Estructura de la tarjeta de producto
                 card.innerHTML = `
                     <img src="${producto.imagen}" alt="${producto.nombre}">
                     <h3>${producto.nombre}</h3>
@@ -383,24 +396,29 @@
             });
         }
 
+        // --- Lógica del Modal ---
+
         function abrirModal(id) {
             productoSeleccionado = productos.find(p => p.id === id);
             
             if (!productoSeleccionado) return;
 
+            // Rellenar el modal con la información del producto
             modalImagen.src = productoSeleccionado.imagen;
             modalNombre.textContent = productoSeleccionado.nombre;
             modalPrecio.textContent = formatearPrecio(productoSeleccionado.precio);
             modalDetalles.textContent = productoSeleccionado.detalles || 'Sin detalles adicionales.';
             
+            // Restablecer la cantidad a 1
             cantidadInput.value = 1;
             
+            // Asignar datos al botón de agregar
             botonAgregarModal.dataset.id = productoSeleccionado.id;
             botonAgregarModal.dataset.nombre = productoSeleccionado.nombre;
             botonAgregarModal.dataset.precio = productoSeleccionado.precio;
             
             modal.style.display = 'block';
-            document.body.style.overflow = 'hidden'; 
+            document.body.style.overflow = 'hidden'; // Evita el scroll en el body
         }
 
         function cerrarModal() {
@@ -409,14 +427,18 @@
             productoSeleccionado = null;
         }
 
+        // Cierra el modal si se hace clic fuera del contenido
         function cerrarModalExterno(e) {
             if (e.target === modal) {
                 cerrarModal();
             }
         }
         
+        // Asignar el evento al botón de agregar dentro del modal
         botonAgregarModal.addEventListener('click', agregarAlCarritoDesdeModal);
 
+
+        // Función para agregar un producto al carrito desde el modal
         function agregarAlCarritoDesdeModal(e) {
             const id = e.target.dataset.id;
             const nombre = e.target.dataset.nombre;
@@ -436,6 +458,7 @@
                 carrito.push({ id, nombre, precio, cantidad });
             }
 
+            // Guardar en localStorage
             localStorage.setItem('carrito', JSON.stringify(carrito));
             actualizarContadorCarrito();
 
@@ -443,6 +466,7 @@
             cerrarModal();
         }
 
+        // Inicializar
         document.addEventListener('DOMContentLoaded', () => {
             cargarProductos();
             actualizarContadorCarrito();
