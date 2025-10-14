@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo | Vito Deportivo</title>
     <style>
-        /* CSS BÁSICO PARA EL CATÁLOGO */
+        /* CSS BÁSICO */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -17,20 +17,29 @@
             color: white;
             padding: 15px 20px;
             text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        header a { /* Estilo para el botón de volver a inicio */
+        header a {
             color: white;
             text-decoration: none;
-            float: left;
             font-weight: bold;
+            padding: 5px 10px;
             margin-left: 10px;
+        }
+        .boton-carrito {
+            background-color: #ff6600;
+            padding: 8px 15px;
+            border-radius: 5px;
+            margin-right: 10px;
         }
         .contenedor-productos {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             padding: 20px;
-            gap: 20px; 
+            gap: 20px;
         }
         .producto-card {
             background-color: white;
@@ -43,13 +52,13 @@
         }
         .producto-card img {
             width: 100%;
-            height: 250px; 
-            object-fit: cover; 
+            height: 250px;
+            object-fit: cover;
             border-radius: 4px;
             margin-bottom: 10px;
         }
         .producto-card h3 {
-            color: #ff6600; 
+            color: #ff6600;
             margin: 10px 0;
         }
         .producto-card p {
@@ -57,18 +66,19 @@
             color: #333;
             font-weight: bold;
         }
-        .boton-whatsapp {
-            display: inline-block;
-            background-color: #25D366; /* Color de WhatsApp */
+        .boton-agregar {
+            background-color: #25D366; /* Verde */
             color: white;
             padding: 10px 20px;
             text-decoration: none;
+            border: none;
             border-radius: 5px;
             margin-top: 10px;
             font-weight: bold;
+            cursor: pointer;
             transition: background-color 0.3s;
         }
-        .boton-whatsapp:hover {
+        .boton-agregar:hover {
             background-color: #128C7E;
         }
     </style>
@@ -78,53 +88,100 @@
     <header>
         <a href="index.html">← Inicio</a>
         <h1>Catálogo Oficial Vito Deportivo</h1>
+        <a href="carrito.html" class="boton-carrito">🛒 Ver Carrito (<span id="contador-carrito">0</span>)</a>
     </header>
 
-    <div class="contenedor-productos">
+    <div class="contenedor-productos" id="contenedor-productos">
+        </div>
+
+    <script src="productos.js"></script>
+    <script>
+        // LÓGICA MÍNIMA DEL CATÁLOGO 
         
-        <div class="producto-card">
-            <img src="https://via.placeholder.com/300x250/FF6600/FFFFFF?text=CAMISETA+RUNNING" alt="Camiseta Técnica de Running">
-            <h3>Camiseta Térmica Racer</h3>
-            <p>Precio: $8.990 ARS</p>
-            <p style="font-size:0.9em; font-weight: normal; color: #666;">Tallas S, M, L. Colores: Negro, Naranja.</p>
-            <a 
-                href="https://wa.me/542267524958?text=Hola%2C%20me%20interesa%20comprar%20la%20*Camiseta%20T%C3%A9rmica%20Racer*%20(Indicar%20Color%20y%20Talla).%20Por%20favor%2C%20confirmen%20stock%20y%20pasos%20de%20pago."
-                target="_blank" 
-                class="boton-whatsapp"
-            >
-                PEDIR POR WHATSAPP
-            </a>
-        </div>
+        const contenedor = document.getElementById('contenedor-productos');
+        const contadorCarrito = document.getElementById('contador-carrito');
 
-        <div class="producto-card">
-            <img src="https://via.placeholder.com/300x250/000000/FFFFFF?text=SHORT+ENTRENAMIENTO" alt="Short de Entrenamiento">
-            <h3>Short Funcional Pro</h3>
-            <p>Precio: $6.500 ARS</p>
-            <p style="font-size:0.9em; font-weight: normal; color: #666;">Tallas S, M, L, XL. Colores: Negro, Gris.</p>
-            <a 
-                href="https://wa.me/542267524958?text=Hola%2C%20me%20interesa%20comprar%20el%20*Short%20Funcional%20Pro*%20(Indicar%20Color%20y%20Talla).%20Por%20favor%2C%20confirmen%20stock%20y%20pasos%20de%20pago."
-                target="_blank" 
-                class="boton-whatsapp"
-            >
-                PEDIR POR WHATSAPP
-            </a>
-        </div>
+        // Función para cargar los productos desde productos.js
+        function cargarProductos() {
+            // Limpiar productos anteriores
+            contenedor.innerHTML = ''; 
+            
+            productos.forEach(producto => {
+                const card = document.createElement('div');
+                card.classList.add('producto-card');
+                
+                // Formatear el precio a moneda
+                const precioFormateado = producto.precio.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0 });
 
-        <div class="producto-card">
-            <img src="https://via.placeholder.com/300x250/007bff/FFFFFF?text=GORRA+DEPORTIVA" alt="Gorra Deportiva">
-            <h3>Gorra Clásica Fit</h3>
-            <p>Precio: $3.990 ARS</p>
-            <p style="font-size:0.9em; font-weight: normal; color: #666;">Talla única. Colores: Azul, Negro, Blanco.</p>
-            <a 
-                href="https://wa.me/542267524958?text=Hola%2C%20me%20interesa%20comprar%20la%20*Gorra%20Cl%C3%A1sica%20Fit*%20(Indicar%20Color).%20Por%20favor%2C%20confirmen%20stock%20y%20pasos%20de%20pago."
-                target="_blank" 
-                class="boton-whatsapp"
-            >
-                PEDIR POR WHATSAPP
-            </a>
-        </div>
+                card.innerHTML = `
+                    <img src="${producto.imagen}" alt="${producto.nombre}">
+                    <h3>${producto.nombre}</h3>
+                    <p>${precioFormateado}</p>
+                    <p style="font-size:0.9em; font-weight: normal; color: #666;">${producto.detalles || ''}</p>
+                    <button 
+                        class="boton-agregar"
+                        data-id="${producto.id}"
+                        data-nombre="${producto.nombre}"
+                        data-precio="${producto.precio}"
+                    >
+                        AÑADIR AL CARRITO
+                    </button>
+                `;
+                contenedor.appendChild(card);
+            });
+            
+            // Adjuntar evento de clic a los nuevos botones
+            document.querySelectorAll('.boton-agregar').forEach(button => {
+                button.addEventListener('click', agregarProductoAlCarrito);
+            });
+            
+            // Actualizar el contador inicial
+            actualizarContadorCarrito();
+        }
+
+        // --- Lógica del Carrito (Compartida con carrito.html) ---
         
-        </div>
+        function getCarrito() {
+            // Lee el carrito de la memoria local. Si no existe, devuelve un array vacío.
+            return JSON.parse(localStorage.getItem('carritoVito')) || [];
+        }
 
+        function guardarCarrito(carrito) {
+            localStorage.setItem('carritoVito', JSON.stringify(carrito));
+            actualizarContadorCarrito();
+        }
+        
+        function actualizarContadorCarrito() {
+            const carrito = getCarrito();
+            const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+            contadorCarrito.textContent = totalItems;
+        }
+
+        function agregarProductoAlCarrito(event) {
+            const button = event.target;
+            const id = button.getAttribute('data-id');
+            const nombre = button.getAttribute('data-nombre');
+            // Usar parseFloat para asegurarse de que es un número
+            const precio = parseFloat(button.getAttribute('data-precio')); 
+            
+            let carrito = getCarrito();
+            const itemExistente = carrito.find(item => item.id === id);
+
+            if (itemExistente) {
+                // Si existe, solo aumenta la cantidad
+                itemExistente.cantidad += 1;
+            } else {
+                // Si es nuevo, añade el producto con cantidad 1
+                carrito.push({ id, nombre, precio, cantidad: 1 });
+            }
+            
+            guardarCarrito(carrito);
+            alert(`"${nombre}" añadido al carrito.`);
+        }
+
+        // Ejecutar la función principal al cargar la página
+        cargarProductos();
+        
+    </script>
 </body>
 </html>
